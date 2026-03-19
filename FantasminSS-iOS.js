@@ -22,58 +22,20 @@ const SPEECH = {
 const S = SPEECH[DEVICE_LANG] || SPEECH["es"]
 
 const VPS_HOSTING_KEYWORDS = [
-  "hostinger", "hstgr",
-  "locaweb",
-  "kinghost",
-  "umbler",
-  "hostgator",
-  "uol host", "uolhost",
-  "bol", "bol.com.br",
-  "redehost",
-  "weblink",
-  "brasileirohost", "br.host",
-  "dialhost",
-  "serverspace",
-  "melhorhospedagem",
-  "ibrcom",
-  "masterweb",
-  "superdomínios", "superdomin",
-  "plankton", "vps.br",
-  "digitalocean",
-  "linode", "akamai",
-  "vultr",
-  "hetzner",
-  "ovh", "ovhcloud",
-  "contabo",
-  "ionos",
-  "godaddy",
-  "siteground",
-  "cloudways",
-  "amazon", "aws", "amazonaws",
-  "google cloud", "googlecloud",
-  "microsoft azure", "azure",
-  "alibaba cloud", "alibabacloud",
-  "tencent cloud", "tencentcloud",
-  "hstgr.cloud",
-  "srv.umbler",
-  "kinghost.net",
-  "locaweb.com.br",
-  "choopa", "psychz", "m247",
-  "serverius", "frantech", "buyvm",
-  "sharktech", "quadranet", "nexeon",
-  "servermania", "hostwinds", "racknerd",
-  "dedipath", "spartanhost", "cloudie",
-  "tsohost", "wavenet", "fasthosts",
-  "multacom",
-  "telus",
-  "fdcservers", "fdc servers",
-  "leaseweb",
-  "colocation america",
-  "b2 net", "b2net",
-  "path.net",
-  "datacamp",
-  "tzulo",
-  "coresite",
+  "hostinger", "hstgr", "locaweb", "kinghost", "umbler", "hostgator",
+  "uol host", "uolhost", "bol", "bol.com.br", "redehost", "weblink",
+  "brasileirohost", "br.host", "dialhost", "serverspace", "melhorhospedagem",
+  "ibrcom", "masterweb", "superdomínios", "superdomin", "plankton", "vps.br",
+  "digitalocean", "linode", "akamai", "vultr", "hetzner", "ovh", "ovhcloud",
+  "contabo", "ionos", "godaddy", "siteground", "cloudways", "amazon", "aws",
+  "amazonaws", "google cloud", "googlecloud", "microsoft azure", "azure",
+  "alibaba cloud", "alibabacloud", "tencent cloud", "tencentcloud",
+  "hstgr.cloud", "srv.umbler", "kinghost.net", "locaweb.com.br", "choopa",
+  "psychz", "m247", "serverius", "frantech", "buyvm", "sharktech",
+  "quadranet", "nexeon", "servermania", "hostwinds", "racknerd", "dedipath",
+  "spartanhost", "cloudie", "tsohost", "wavenet", "fasthosts", "multacom",
+  "telus", "fdcservers", "fdc servers", "leaseweb", "colocation america",
+  "b2 net", "b2net", "path.net", "datacamp", "tzulo", "coresite",
 ]
 
 const CHEAT_PROXY_ASN = {
@@ -94,23 +56,10 @@ const CHEAT_PROXY_ASN = {
 }
 
 const RDNS_HOSTING_PATTERNS = [
-  "hstgr.cloud",
-  "staticip",
-  "srv.",
-  "vps.",
-  "cloud.",
-  "host.",
-  "server.",
-  "dedicated.",
-  ".kinghost.net",
-  ".locaweb.com.br",
-  ".umbler.net",
-  ".hostgator.com.br",
-  ".digitalocean.com",
-  ".vultr.com",
-  ".linode.com",
-  ".hetzner.com",
-  ".contabo.net",
+  "hstgr.cloud", "staticip", "srv.", "vps.", "cloud.", "host.",
+  "server.", "dedicated.", ".kinghost.net", ".locaweb.com.br",
+  ".umbler.net", ".hostgator.com.br", ".digitalocean.com",
+  ".vultr.com", ".linode.com", ".hetzner.com", ".contabo.net",
 ]
 
 const CHEAT_APPS = {
@@ -234,51 +183,6 @@ const KNOWN_CHEAT_INFRA = {
   "loginbp.ggpolarbear.com":         "Polar Bear cheat — servidor confirmado",
 }
 
-async function findNdjsonFile() {
-  let path = await DocumentPicker.openFile()
-  if (!path) return null
-  return { path: path, fm: FileManager.local() }
-}
-
-function parseNdjson(content) {
-  let trimmed = content.trim()
-  if (trimmed.startsWith("[")) {
-    try { return JSON.parse(trimmed) } catch(e) {}
-  }
-  return trimmed
-    .split("\n")
-    .map(l => l.trim())
-    .filter(l => l.length > 0)
-    .map(l => { try { return JSON.parse(l) } catch(e) { return null } })
-    .filter(Boolean)
-}
-
-function parseIpsFile(content) {
-  try {
-    let trimmed = content.trim()
-    let lines = trimmed.split("\n").map(l => l.trim()).filter(Boolean)
-    let headerLine = lines.find(l => l.startsWith("{"))
-    let dataLine   = lines.find(l => l.startsWith("["))
-    let header = null
-    try { header = headerLine ? JSON.parse(headerLine) : null } catch(e) {}
-    let entries = []
-    try { entries = dataLine ? JSON.parse(dataLine) : [] } catch(e) {}
-    return { header, entries }
-  } catch(e) {
-    return { header: null, entries: [] }
-  }
-}
-
-function looksLikePrivacyReport(content) {
-  let sample = content.trim().slice(0, 500)
-  return sample.includes("networkActivity") || sample.includes("bundleID") || sample.includes("timeStamp")
-}
-
-function looksLikeUsageFile(content) {
-  let sample = content.trim().slice(0, 300)
-  return sample.includes("xp_amp_app_usage") || sample.includes("roots_installed") || sample.includes("usageClientId")
-}
-
 const IPS_CHEAT_EXACT = new Set([
   "com.touchingapp.potatsolite", "com.touchingapp.potatso",
   "com.shadowrocket.Shadowrocket", "com.liguangming.Shadowrocket",
@@ -365,6 +269,51 @@ const IPS_CHEAT_KEYWORDS = [
   "netlify", "cheat", "hack", "bypass", "inject", "tweak",
   "substrate", "substitute", "libhooker",
 ]
+
+async function findNdjsonFile() {
+  let path = await DocumentPicker.openFile()
+  if (!path) return null
+  return { path: path, fm: FileManager.local() }
+}
+
+function parseNdjson(content) {
+  let trimmed = content.trim()
+  if (trimmed.startsWith("[")) {
+    try { return JSON.parse(trimmed) } catch(e) {}
+  }
+  return trimmed
+    .split("\n")
+    .map(l => l.trim())
+    .filter(l => l.length > 0)
+    .map(l => { try { return JSON.parse(l) } catch(e) { return null } })
+    .filter(Boolean)
+}
+
+function parseIpsFile(content) {
+  try {
+    let trimmed = content.trim()
+    let lines = trimmed.split("\n").map(l => l.trim()).filter(Boolean)
+    let headerLine = lines.find(l => l.startsWith("{"))
+    let dataLine   = lines.find(l => l.startsWith("["))
+    let header = null
+    try { header = headerLine ? JSON.parse(headerLine) : null } catch(e) {}
+    let entries = []
+    try { entries = dataLine ? JSON.parse(dataLine) : [] } catch(e) {}
+    return { header, entries }
+  } catch(e) {
+    return { header: null, entries: [] }
+  }
+}
+
+function looksLikePrivacyReport(content) {
+  let sample = content.trim().slice(0, 500)
+  return sample.includes("networkActivity") || sample.includes("bundleID") || sample.includes("timeStamp")
+}
+
+function looksLikeUsageFile(content) {
+  let sample = content.trim().slice(0, 300)
+  return sample.includes("xp_amp_app_usage") || sample.includes("roots_installed") || sample.includes("usageClientId")
+}
 
 function analyzeIps(parsed) {
   let entries = parsed.entries || parsed || []
@@ -838,11 +787,8 @@ async function analyze(entries) {
   })
 
   let ghostAppFindings = []
-  if (typeof window !== "undefined") {
-  } else {
-  }
+
   const GHOST_SUSPECT_DOMAINS = new Set(Object.keys(KNOWN_CHEAT_INFRA))
-  SUSPICIOUS_TLDS.forEach(t => {})
 
   let suspectByBundle = {}
   for (let e of netEntries) {
@@ -1036,7 +982,6 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
       </div>
     </div>`
   }
-
 
   let ghostSection = ""
   if (ghostAppFindings && ghostAppFindings.length > 0) {
@@ -1718,85 +1663,85 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   return rawHtml
 }
 
-function buildLangScript() {
+function getLangScriptText() {
   return `<script>
 var TRANSLATIONS = {
   pt: {
     eyebrow: "Escáner iOS",
-    credits: "por Fantasma · Samir · Katiau",
+    credits: "por Fantasma @uszoo · Juniormodz · Tecamodz",
     fileLabel: "Archivo:",
     start: "Inicio",
     lastRecord: "Último registro",
     uniqueDomains: "Dominios únicos",
-    totalConns: "Total de conexiones",
-    monitoredFor: "Monitoreado hace",
+    totalConns: "Total de conexões",
+    monitoredFor: "Monitorado há",
     criticalLabel: "Crítico",
-    suspectLabel: "Sospechoso",
-    possibleLabel: "Posible",
-    appProxyTitle: "Apps Proxy / Cheat Detectadas",
-    appProxySub: "Aplicaciones conocidas de interceptación de tráfico",
-    suspectIPsTitle: "IPs Sospechosas",
+    suspectLabel: "Suspeito",
+    possibleLabel: "Possível",
+    appProxyTitle: "Apps Proxy / Cheat Detectados",
+    appProxySub: "Aplicativos conhecidos de interceptação de tráfego",
+    suspectIPsTitle: "IPs Suspeitos",
     suspectIPsSub: "VPS / Hosting / Proxy confirmados",
-    possibleIPsTitle: "IPs Posibles",
-    possibleIPsSub: "Infraestructura cloud / datacenter",
+    possibleIPsTitle: "IPs Possíveis",
+    possibleIPsSub: "Infraestrutura cloud / datacenter",
     labelIP: "IP",
     labelCountry: "País",
-    labelProvider: "Proveedor",
+    labelProvider: "Provedor",
     labelOrg: "Org",
     labelRDNS: "rDNS",
     labelHTTP: "HTTP",
     labelReason: "Motivo",
     labelUsedBy: "Usado por",
     labelApp: "App",
-    labelSuspectIPs: "IPs sospechosas",
-    noneDetected: "Ninguna IP sospechosa detectada",
-    noVPS: "✓ Ninguna IP VPS / Hosting / Proxy detectada.",
-    staleLabel: "Archivo posiblemente antiguo",
-    staleHint: "Sospecha: archivo generado fuera del período del partido para ocultar actividad.",
-    ffLabel: "Sesiones en el período",
-    ffLastOpen: "Última apertura",
-    ffFirstOpen: "Primera apertura",
-    ffSessions: "inicializaciones registradas en el período",
-    ffHint: "Si la última apertura fue después del partido → ¡aplica el W.O!",
-    appStoreLabel: "App Store abierta",
-    appStoreHint: "Si fue después del partido → ¡aplica el W.O!",
-    uptimeLess20: "MENOS DE 20MIN — ¡El reporte puede no cubrir la partida entera!",
+    labelSuspectIPs: "IPs suspeitos",
+    noneDetected: "Nenhum IP suspeito detectado",
+    noVPS: "✓ Nenhum IP VPS / Hosting / Proxy detectado.",
+    staleLabel: "Arquivo possivelmente antigo",
+    staleHint: "Suspeita: arquivo gerado fora do período da partida para ocultar atividade.",
+    ffLabel: "Sessões no período",
+    ffLastOpen: "Última abertura",
+    ffFirstOpen: "Primeira abertura",
+    ffSessions: "inicializações registradas no período",
+    ffHint: "Se a última abertura foi depois da partida → aplique W.O!",
+    appStoreLabel: "App Store aberta",
+    appStoreHint: "Se foi depois da partida → aplique W.O!",
+    uptimeLess20: "MENOS DE 20MIN — O relatório pode não cobrir a partida inteira!",
     badgeCritical: "⚠ CRÍTICO — APP PROXY/CHEAT",
-    badgeSuspect: "SOSPECHOSO",
-    badgePossible: "POSIBLE",
-    badgeDomainSuspect: "⚠ DOMINIO SOSPECHOSO",
+    badgeSuspect: "SUSPEITO",
+    badgePossible: "POSSÍVEL",
+    badgeDomainSuspect: "⚠ DOMÍNIO SUSPEITO",
     of: "de",
-    online: "● En línea",
-    offline: "● Sin conexión / Sin respuesta",
+    online: "● Online",
+    offline: "● Offline / Sem resposta",
     lastRecord2: "Último registro:",
-    conns: "conexiones",
-    domains: "dominios",
+    conns: "conexões",
+    domains: "domínios",
     labelCheat: "Cheat",
     labelIndicator: "Indicador",
-    indicatorDomain: "Dominio detectado en el reporte de red",
-    indicatorIP: "IP detectada en el reporte de red",
-    iosVersionLabel: "Versión iOS",
-    rootsCardLabel: "⚠ Certificados raíz",
-    rootsLabel: "Certificado Raíz Sospechoso",
-    rootsDetail1: "certificado raíz instalado",
-    rootsDetailN: "certificados raíz instalados",
-    rootsHint: "Certificados raíz permiten interceptar tráfico HTTPS — patrón de proxy cheat tipo mitmproxy",
-    ipsTitle: "Apps Sospechosas Instaladas",
-    ipsSub: "Detectadas en el historial de uso del dispositivo",
-    ipsHint: "⚠ Apps encontradas en los datos de análisis del iPhone — indican presencia de herramientas de cheat/jailbreak/proxy",
-    ipsLaunched: "▶ Abierto",
+    indicatorDomain: "Domínio detectado no relatório de rede",
+    indicatorIP: "IP detectado no relatório de rede",
+    iosVersionLabel: "Versão iOS",
+    rootsCardLabel: "⚠ Certificados raiz",
+    rootsLabel: "Certificado Raiz Suspeito",
+    rootsDetail1: "certificado raiz instalado",
+    rootsDetailN: "certificados raiz instalados",
+    rootsHint: "Certificados raiz permitem interceptar tráfego HTTPS — padrão de proxy cheat tipo mitmproxy",
+    ipsTitle: "Apps Suspeitos Instalados",
+    ipsSub: "Detectados no histórico de uso do dispositivo",
+    ipsHint: "⚠ Apps encontrados nos dados de análise do iPhone — indicam presença de ferramentas de cheat/jailbreak/proxy",
+    ipsLaunched: "▶ Aberto",
     ipsInstalled: "⬇ Instalado",
     badgeKnownCheat: "⚠ CRÍTICO — CHEAT CONFIRMADO",
-    reasonTLD: function(tld){ return "TLD sospechoso detectado: \\"" + tld + "\\" — patrón común en cheats/proxies"; },
-    reasonWord: function(word){ return "Palabra sospechosa en el dominio: \\"" + word + "\\""; },
+    reasonTLD: function(tld){ return "TLD suspeito detectado: \\"" + tld + "\\" — padrão comum em cheats/proxies"; },
+    reasonWord: function(word){ return "Palavra suspeita no domínio: \\"" + word + "\\""; },
     reasonVPS: function(isp){ return "VPS/HOSTING — ISP: " + isp; },
     reasonProxy: "PROXY / VPN detectado",
-    reasonCF: function(asn){ return "Cloudflare accedido vía IP directa — patrón de proxy cheat (" + asn + ")"; },
-    reasonASN: function(asn,desc){ return "ASN de proxy cheat conocido: " + asn + " — " + desc; },
+    reasonCF: function(asn){ return "Cloudflare acessado via IP direto — padrão de proxy cheat (" + asn + ")"; },
+    reasonASN: function(asn,desc){ return "ASN de proxy cheat conhecido: " + asn + " — " + desc; },
     reasonRDNS: function(rdns){ return "rDNS de servidor: " + rdns; },
-    reasonHostinger: function(rdns){ return "Hostinger VPS (patrón proxy cheat BR conocido): " + rdns; },
-    reasonNoRDNS: "Sin rDNS (PTR) — típico de VPS usado como proxy",
-    reasonOrg: function(kw){ return "Org/ISP asociado a hosting/proxy cheat: " + kw; },
+    reasonHostinger: function(rdns){ return "Hostinger VPS (padrão proxy cheat BR conhecido): " + rdns; },
+    reasonNoRDNS: "Sem rDNS (PTR) — típico de VPS usado como proxy",
+    reasonOrg: function(kw){ return "Org/ISP associado a hosting/proxy cheat: " + kw; },
   },
   en: {
     eyebrow: "iOS Scanner",
@@ -2134,7 +2079,7 @@ function setLang(lang) {
       if (el.textContent.indexOf('Online') !== -1 || el.textContent.indexOf('Offline') !== -1 || el.textContent.indexOf('línea') !== -1 || el.textContent.indexOf('conexión') !== -1) {
         el.innerHTML = el.innerHTML
           .replace(/●\\s*(En línea|Online)/g, t.online)
-          .replace(/●\\s*(Sin conexión[^<]*|Offline[^<]*)/g, t.offline);
+          .replace(/●\\s*(Sin conexão[^<]*|Offline[^<]*)/g, t.offline);
       }
     });
   });
@@ -2171,7 +2116,13 @@ window.setLang = setLang;
   }
 })();
 <\/script>`
-  await wv.evaluateJavaScript(langScript)
+}
+
+async function showResult(html) {
+  let wv = new WebView()
+  await wv.loadHTML(html)
+  let langScriptText = getLangScriptText()
+  await wv.evaluateJavaScript(langScriptText)
   Speech.speak(S.done)
   await wait(1200)
   await wv.present(false)
