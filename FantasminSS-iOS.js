@@ -15,7 +15,7 @@ const SPEECH = {
   es: {
     start:    "Analizando, espera que FantasmaSS termine.",
     half:     "Escáner al cincuenta por ciento. Espera un poco más.",
-    probe:    "Escáner al noventa por ciento. Ya casi termina.",
+    probe:    "Escáner al noventa por ciento. Espera para poder encontrar cheats.",
     done:     "FantasmaSS finalizado. Analiza los resultados con cuidado.",
   },
 }
