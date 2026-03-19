@@ -1680,7 +1680,7 @@ function getLangScriptText() {
 var TRANSLATIONS = {
   pt: {
     eyebrow: "Scanner iOS",
-    credits: "por Fantasma @orinado · Juniormodz · Teca",
+    credits: "por Fantasmin · Samir · Katiau",
     fileLabel: "Arquivo:",
     start: "Início",
     lastRecord: "Último registro",
@@ -1757,7 +1757,7 @@ var TRANSLATIONS = {
   },
   en: {
     eyebrow: "iOS Scanner",
-    credits: "by Fantasmin @orinado · Juniormodz · Teca",
+    credits: "by Fantasmin · Samir · Katiau",
     fileLabel: "File:",
     start: "Start",
     lastRecord: "Last record",
@@ -1834,7 +1834,7 @@ var TRANSLATIONS = {
   },
   es: {
     eyebrow: "Scanner iOS",
-    credits: "por Fantasmin @orinado· Juniormodz · Teca",
+    credits: "por Fantasmin · Samir · Katiau",
     fileLabel: "Archivo:",
     start: "Inicio",
     lastRecord: "Último registro",
