@@ -1,7 +1,7 @@
-const DEVICE_LANG = (Device.language() || "es").toLowerCase().substring(0, 2)
+const DEVICE_LANG = (Device.language() || "pt").toLowerCase().substring(0, 2)
 const SPEECH = {
   pt: {
-    start:    "Analisando, aguarde o FantasmaSS terminar",
+    start:    "Analisando, aguarde o Fantasma terminar",
     half:     "Scanner em cinquenta por cento. Aguarde mais um pouco.",
     probe:    "Scanner em noventa por cento. Aguarde mais um pouco.",
     done:     "FantasmaSS finalizado. Analise os resultados com cuidado.",
@@ -19,23 +19,61 @@ const SPEECH = {
     done:     "FantasmaSS finalizado. Analiza los resultados con cuidado.",
   },
 }
-const S = SPEECH[DEVICE_LANG] || SPEECH["es"]
+const S = SPEECH[DEVICE_LANG] || SPEECH["pt"]
 
 const VPS_HOSTING_KEYWORDS = [
-  "hostinger", "hstgr", "locaweb", "kinghost", "umbler", "hostgator",
-  "uol host", "uolhost", "bol", "bol.com.br", "redehost", "weblink",
-  "brasileirohost", "br.host", "dialhost", "serverspace", "melhorhospedagem",
-  "ibrcom", "masterweb", "superdomínios", "superdomin", "plankton", "vps.br",
-  "digitalocean", "linode", "akamai", "vultr", "hetzner", "ovh", "ovhcloud",
-  "contabo", "ionos", "godaddy", "siteground", "cloudways", "amazon", "aws",
-  "amazonaws", "google cloud", "googlecloud", "microsoft azure", "azure",
-  "alibaba cloud", "alibabacloud", "tencent cloud", "tencentcloud",
-  "hstgr.cloud", "srv.umbler", "kinghost.net", "locaweb.com.br", "choopa",
-  "psychz", "m247", "serverius", "frantech", "buyvm", "sharktech",
-  "quadranet", "nexeon", "servermania", "hostwinds", "racknerd", "dedipath",
-  "spartanhost", "cloudie", "tsohost", "wavenet", "fasthosts", "multacom",
-  "telus", "fdcservers", "fdc servers", "leaseweb", "colocation america",
-  "b2 net", "b2net", "path.net", "datacamp", "tzulo", "coresite",
+  "hostinger", "hstgr",
+  "locaweb",
+  "kinghost",
+  "umbler",
+  "hostgator",
+  "uol host", "uolhost",
+  "bol", "bol.com.br",
+  "redehost",
+  "weblink",
+  "brasileirohost", "br.host",
+  "dialhost",
+  "serverspace",
+  "melhorhospedagem",
+  "ibrcom",
+  "masterweb",
+  "superdomínios", "superdomin",
+  "plankton", "vps.br",
+  "digitalocean",
+  "linode", "akamai",
+  "vultr",
+  "hetzner",
+  "ovh", "ovhcloud",
+  "contabo",
+  "ionos",
+  "godaddy",
+  "siteground",
+  "cloudways",
+  "amazon", "aws", "amazonaws",
+  "google cloud", "googlecloud",
+  "microsoft azure", "azure",
+  "alibaba cloud", "alibabacloud",
+  "tencent cloud", "tencentcloud",
+  "hstgr.cloud",
+  "srv.umbler",
+  "kinghost.net",
+  "locaweb.com.br",
+  "choopa", "psychz", "m247",
+  "serverius", "frantech", "buyvm",
+  "sharktech", "quadranet", "nexeon",
+  "servermania", "hostwinds", "racknerd",
+  "dedipath", "spartanhost", "cloudie",
+  "tsohost", "wavenet", "fasthosts",
+  "multacom",
+  "telus",
+  "fdcservers", "fdc servers",
+  "leaseweb",
+  "colocation america",
+  "b2 net", "b2net",
+  "path.net",
+  "datacamp",
+  "tzulo",
+  "coresite",
 ]
 
 const CHEAT_PROXY_ASN = {
@@ -50,16 +88,29 @@ const CHEAT_PROXY_ASN = {
   "AS40065": "Cnservers / FDC Servers",
   "AS53667": "FranTech Solutions",
   "AS395954": "Leaseweb USA",
-  "AS13335": "Cloudflare (CDN/Proxy — común en cheats)",
+  "AS13335": "Cloudflare (CDN/Proxy — comum em cheats)",
   "AS209": "CenturyLink / Lumen",
   "AS7203": "Sharktech",
 }
 
 const RDNS_HOSTING_PATTERNS = [
-  "hstgr.cloud", "staticip", "srv.", "vps.", "cloud.", "host.",
-  "server.", "dedicated.", ".kinghost.net", ".locaweb.com.br",
-  ".umbler.net", ".hostgator.com.br", ".digitalocean.com",
-  ".vultr.com", ".linode.com", ".hetzner.com", ".contabo.net",
+  "hstgr.cloud",
+  "staticip",
+  "srv.",
+  "vps.",
+  "cloud.",
+  "host.",
+  "server.",
+  "dedicated.",
+  ".kinghost.net",
+  ".locaweb.com.br",
+  ".umbler.net",
+  ".hostgator.com.br",
+  ".digitalocean.com",
+  ".vultr.com",
+  ".linode.com",
+  ".hetzner.com",
+  ".contabo.net",
 ]
 
 const CHEAT_APPS = {
@@ -89,10 +140,10 @@ const CHEAT_APPS = {
   "com.tihmstar.checkra1n":           "checkra1n — Jailbreak",
   "org.taurine.jailbreak":            "Taurine — Jailbreak",
   "xyz.palera1n.palera1n":            "palera1n — Jailbreak",
-  "com.opa334.TrollStore":            "TrollStore — sideload sin JB",
+  "com.opa334.TrollStore":            "TrollStore — sideload sem JB",
   "com.opa334.TrollStoreHelper":      "TrollStoreHelper",
-  "com.opa334.trolldecrypt":          "TrollDecrypt — descifrar IPAs",
-  "com.opa334.trollfools":            "TrollFools — inyector de tweaks",
+  "com.opa334.trolldecrypt":          "TrollDecrypt — decifrar IPAs",
+  "com.opa334.trollfools":            "TrollFools — injetor de tweaks",
   "xyz.willy.Zebra":                  "Zebra — package manager JB",
   "com.cydia.Cydia":                  "Cydia — package manager JB",
   "com.rileytestut.AltStore":         "AltStore — sideload",
@@ -104,16 +155,16 @@ const CHEAT_APPS = {
   "com.gbox.pubg":                    "GBox — cheat mod pubg/ff",
   "com.tigisoftware.Filza":           "Filza — file manager root",
   "com.tigisoftware.FilzaFree":       "Filza Free — file manager root",
-  "app.ish.iSH":                      "iSH — shell Linux en iOS",
+  "app.ish.iSH":                      "iSH — shell Linux no iOS",
   "com.septudio.SSHClientLite":       "SSH Client Lite — shell remoto",
   "live.cclerc.geranium":             "Geranium — tweak manager JB",
-  "com.apple.dt.Xcode":               "Xcode — IDE Apple (sospechoso en contexto de juego)",
-  "com.apple.Preferences.Developer":  "Preferencias de Desarrollador (activas)",
-  "com.apple.developer":              "Perfil de desarrollador Apple",
-  "com.shpion.cleaner":               "Spion Cleaner — limpieza de rastros sospechosa",
-  "com.ifunbox.ifunbox":              "iFunBox — administrador de archivos iOS",
-  "com.limneos.adprivacy":            "AdPrivacy — bloqueo/manipulación de red",
-  "com.jjcm.nomoread":                "NoMoreAd — bloqueo de red (MITM posible)",
+  "com.apple.dt.Xcode":               "Xcode — IDE Apple (suspeito em contexto de jogo)",
+  "com.apple.Preferences.Developer":  "Preferências de Desenvolvedor (ativas)",
+  "com.apple.developer":              "Perfil de desenvolvedor Apple",
+  "com.shpion.cleaner":               "Spion Cleaner — limpeza de rastros suspeita",
+  "com.ifunbox.ifunbox":              "iFunBox — gerenciador de arquivos iOS",
+  "com.limneos.adprivacy":            "AdPrivacy — bloqueio/manipulação de rede",
+  "com.jjcm.nomoread":                "NoMoreAd — bloqueio de rede (MITM possível)",
 }
 
 const SUSPICIOUS_TLDS = [
@@ -175,12 +226,57 @@ const FF_LEGIT_CALLERS = new Set(["com.dts.freefireth", "com.dts.freefiremax"])
 
 const KNOWN_CHEAT_INFRA = {
   "46.202.145.85":      "Fatality Cheats — servidor confirmado",
-  "fatalitycheats.xyz": "Fatality Cheats — dominio oficial del cheat",
+  "fatalitycheats.xyz": "Fatality Cheats — domínio oficial do cheat",
   "anubisw.online":     "Servidor de cheat confirmado — Free Fire",
   "api.baontq.xyz":     "API de cheat confirmado — Free Fire",
-  "version.ffmax.purplevioleto.com": "Versión modificada Free Fire MAX — cheat confirmado",
+  "version.ffmax.purplevioleto.com": "Versão modificada Free Fire MAX — cheat confirmado",
   "version.ggwhitehawk.com":         "White Hawk cheat — servidor confirmado",
   "loginbp.ggpolarbear.com":         "Polar Bear cheat — servidor confirmado",
+}
+
+async function findNdjsonFile() {
+  let path = await DocumentPicker.openFile()
+  if (!path) return null
+  return { path: path, fm: FileManager.local() }
+}
+
+function parseNdjson(content) {
+  let trimmed = content.trim()
+  if (trimmed.startsWith("[")) {
+    try { return JSON.parse(trimmed) } catch(e) {}
+  }
+  return trimmed
+    .split("\n")
+    .map(l => l.trim())
+    .filter(l => l.length > 0)
+    .map(l => { try { return JSON.parse(l) } catch(e) { return null } })
+    .filter(Boolean)
+}
+
+function parseIpsFile(content) {
+  try {
+    let trimmed = content.trim()
+    let lines = trimmed.split("\n").map(l => l.trim()).filter(Boolean)
+    let headerLine = lines.find(l => l.startsWith("{"))
+    let dataLine   = lines.find(l => l.startsWith("["))
+    let header = null
+    try { header = headerLine ? JSON.parse(headerLine) : null } catch(e) {}
+    let entries = []
+    try { entries = dataLine ? JSON.parse(dataLine) : [] } catch(e) {}
+    return { header, entries }
+  } catch(e) {
+    return { header: null, entries: [] }
+  }
+}
+
+function looksLikePrivacyReport(content) {
+  let sample = content.trim().slice(0, 500)
+  return sample.includes("networkActivity") || sample.includes("bundleID") || sample.includes("timeStamp")
+}
+
+function looksLikeUsageFile(content) {
+  let sample = content.trim().slice(0, 300)
+  return sample.includes("xp_amp_app_usage") || sample.includes("roots_installed") || sample.includes("usageClientId")
 }
 
 const IPS_CHEAT_EXACT = new Set([
@@ -270,51 +366,6 @@ const IPS_CHEAT_KEYWORDS = [
   "substrate", "substitute", "libhooker",
 ]
 
-async function findNdjsonFile() {
-  let path = await DocumentPicker.openFile()
-  if (!path) return null
-  return { path: path, fm: FileManager.local() }
-}
-
-function parseNdjson(content) {
-  let trimmed = content.trim()
-  if (trimmed.startsWith("[")) {
-    try { return JSON.parse(trimmed) } catch(e) {}
-  }
-  return trimmed
-    .split("\n")
-    .map(l => l.trim())
-    .filter(l => l.length > 0)
-    .map(l => { try { return JSON.parse(l) } catch(e) { return null } })
-    .filter(Boolean)
-}
-
-function parseIpsFile(content) {
-  try {
-    let trimmed = content.trim()
-    let lines = trimmed.split("\n").map(l => l.trim()).filter(Boolean)
-    let headerLine = lines.find(l => l.startsWith("{"))
-    let dataLine   = lines.find(l => l.startsWith("["))
-    let header = null
-    try { header = headerLine ? JSON.parse(headerLine) : null } catch(e) {}
-    let entries = []
-    try { entries = dataLine ? JSON.parse(dataLine) : [] } catch(e) {}
-    return { header, entries }
-  } catch(e) {
-    return { header: null, entries: [] }
-  }
-}
-
-function looksLikePrivacyReport(content) {
-  let sample = content.trim().slice(0, 500)
-  return sample.includes("networkActivity") || sample.includes("bundleID") || sample.includes("timeStamp")
-}
-
-function looksLikeUsageFile(content) {
-  let sample = content.trim().slice(0, 300)
-  return sample.includes("xp_amp_app_usage") || sample.includes("roots_installed") || sample.includes("usageClientId")
-}
-
 function analyzeIps(parsed) {
   let entries = parsed.entries || parsed || []
   let results = []
@@ -335,7 +386,7 @@ function analyzeIps(parsed) {
       let bidLower = bid.toLowerCase()
       for (let kw of IPS_CHEAT_KEYWORDS) {
         if (bidLower.includes(kw)) {
-          reason = "Palabra clave sospechosa: \"" + kw + "\" en el bundle ID"
+          reason = "Keyword suspeita: \"" + kw + "\" no bundle ID"
           break
         }
       }
@@ -346,7 +397,7 @@ function analyzeIps(parsed) {
       const FF_LEGIT = ["com.dts.freefireth", "com.dts.freefiremax"]
       const FF_PREFIXES = ["com.dts.freefireth", "com.dts.freefiremax"]
       if (!FF_LEGIT.includes(bid) && FF_PREFIXES.some(p => bidLower.startsWith(p) || (bidLower.includes("freefire") && !FF_LEGIT.includes(bid)))) {
-        reason = "Copia sospechosa de Free Fire — bundle ID modificado"
+        reason = "Cópia suspeita do Free Fire — bundle ID modificado"
         category = "critical"
       }
     }
@@ -368,7 +419,7 @@ function analyzeIps(parsed) {
 
 function validateReport(entries) {
   if (!entries || entries.length === 0)
-    return { ok: false, reason: "Archivo vacío o sin entradas válidas." }
+    return { ok: false, reason: "Arquivo vazio ou sem entradas válidas." }
 
   let hasNet    = entries.some(e => e.type === "networkActivity")
   let hasAccess = entries.some(e => e.type === "access")
@@ -376,11 +427,11 @@ function validateReport(entries) {
   let hasTimestamp = entries.some(e => e.timeStamp)
 
   if (!hasNet && !hasAccess)
-    return { ok: false, reason: "Ninguna entrada de red o acceso encontrada.\nEste no parece ser un App Privacy Report válido." }
+    return { ok: false, reason: "Nenhuma entrada de rede ou acesso encontrada.\nEste nao parece ser um App Privacy Report valido." }
   if (!hasBundleID)
-    return { ok: false, reason: "Ningún bundleID encontrado.\nEl archivo puede estar corrupto o fue modificado." }
+    return { ok: false, reason: "Nenhum bundleID encontrado.\nO arquivo pode estar corrompido ou foi modificado." }
   if (!hasTimestamp)
-    return { ok: false, reason: "Ningún timestamp encontrado.\nEl archivo puede estar corrupto o fue modificado." }
+    return { ok: false, reason: "Nenhum timestamp encontrado.\nO arquivo pode estar corrompido ou foi modificado." }
 
   let timestamps = entries.map(e => e.timeStamp).filter(Boolean)
   let valid = timestamps.filter(t => {
@@ -388,12 +439,12 @@ function validateReport(entries) {
     return y >= 2020 && y <= 2030
   })
   if (valid.length < timestamps.length * 0.5)
-    return { ok: false, reason: "Timestamps fuera del rango esperado.\nEl archivo puede haber sido alterado." }
+    return { ok: false, reason: "Timestamps fora do intervalo esperado.\nO arquivo pode ter sido adulterado." }
 
   let netEntries = entries.filter(e => e.type === "networkActivity")
   let validNet = netEntries.filter(e => e.domain && e.bundleID)
   if (netEntries.length > 0 && validNet.length < netEntries.length * 0.3)
-    return { ok: false, reason: "Muchas entradas de red sin domain/bundleID.\nEl archivo puede haber sido manipulado." }
+    return { ok: false, reason: "Muitas entradas de rede sem domain/bundleID.\nO arquivo pode ter sido manipulado." }
 
   return { ok: true }
 }
@@ -442,7 +493,7 @@ function classifyIP(info, domain) {
     if (domLow.endsWith(tld) || domLow.includes(tld + "/")) {
       severity = "HIGH"
       tldFlag = true
-      reasons.push(`TLD sospechoso detectado: "${tld}" — patrón común en cheats/proxies`)
+      reasons.push(`TLD suspeito detectado: "${tld}" — padrão comum em cheats/proxies`)
       break
     }
   }
@@ -452,7 +503,7 @@ function classifyIP(info, domain) {
       if (parts.includes(word) || domLow.includes(word + ".")) {
         severity = "HIGH"
         tldFlag = true
-        reasons.push(`Palabra sospechosa en el dominio: "${word}"`)
+        reasons.push(`Palavra suspeita no domínio: "${word}"`)
         break
       }
     }
@@ -474,11 +525,11 @@ function classifyIP(info, domain) {
       let domainIsIP = /^[\d.:]+$/.test(domain || "")
       if (domainIsIP) {
         severity = "HIGH"
-        reasons.push(`Cloudflare accedido vía IP directa — patrón de proxy cheat (${asn})`)
+        reasons.push(`Cloudflare acessado via IP direto — padrão de proxy cheat (${asn})`)
       }
     } else {
       severity = "HIGH"
-      reasons.push(`ASN de proxy cheat conocido: ${asn} — ${CHEAT_PROXY_ASN[asn]}`)
+      reasons.push(`ASN de cheat proxy conhecido: ${asn} — ${CHEAT_PROXY_ASN[asn]}`)
     }
   }
 
@@ -493,17 +544,17 @@ function classifyIP(info, domain) {
     }
     if (rdns.match(/^srv\d+\.hstgr\.cloud$/)) {
       severity = "HIGH"
-      reasons.push(`Hostinger VPS (patrón proxy cheat BR): ${info.reverse}`)
+      reasons.push(`Hostinger VPS (padrao cheat proxy BR): ${info.reverse}`)
     }
   } else if (info.hosting) {
-    reasons.push("Sin rDNS (PTR) — típico de VPS usado como proxy")
+    reasons.push("Sem rDNS (PTR) — tipico de VPS usado como proxy")
   }
 
   let orgLower = ((info.org || "") + " " + (info.isp || "") + " " + (info.as || "")).toLowerCase()
   for (let kw of VPS_HOSTING_KEYWORDS) {
     if (orgLower.includes(kw)) {
       severity = severity || "MEDIUM"
-      reasons.push(`Org/ISP asociado a hosting/proxy cheat: ${kw}`)
+      reasons.push(`Org/ISP associado a hospedagem/cheat proxy: ${kw}`)
       break
     }
   }
@@ -585,7 +636,7 @@ async function analyze(entries) {
     .sort((a, b) => b[1] - a[1])
     .map(([d]) => d)
 
-  console.log(`Total de dominios únicos: ${allDomains.length}`)
+  console.log(`Total dominios unicos: ${allDomains.length}`)
 
   let allBundles = new Set()
   for (let e of netEntries) { if (e.bundleID && !IGNORED_BUNDLES.has(e.bundleID)) allBundles.add(e.bundleID) }
@@ -603,7 +654,7 @@ async function analyze(entries) {
       let appEntries = netEntries.filter(e => e.bundleID === bid)
       let appHits = appEntries.reduce((s, e) => s + (e.hits || 1), 0)
       let appDomains = [...new Set(appEntries.map(e => e.domain).filter(Boolean))]
-      ffFakeFindings.push({ bundleID: bid, desc: "Copia sospechosa de Free Fire — bundle ID modificado", hits: appHits, domains: appDomains })
+      ffFakeFindings.push({ bundleID: bid, desc: "Cópia suspeita do Free Fire — bundle ID modificado", hits: appHits, domains: appDomains })
     }
   }
 
@@ -618,6 +669,7 @@ async function analyze(entries) {
   }
   cheatAppFindings = [...ffFakeFindings, ...cheatAppFindings]
 
+  // Coleta quais domínios FF foram chamados pelos apps legítimos do FF
   let ffLegitDomainsSeen = new Set()
   for (let e of netEntries) {
     let d = (e.domain || "").toLowerCase()
@@ -636,6 +688,8 @@ async function analyze(entries) {
     if (FF_LEGIT_CALLERS.has(bid)) continue
     if (IGNORED_BUNDLES.has(bid)) continue
     if (!FF_PROXY_LOGIN_DOMAINS.has(d)) continue
+    // Só dispara se o domínio NÃO foi chamado pelos apps legítimos do FF na mesma sessão
+    // Isso evita falsos positivos de janela de tempo (iOS agrupando apps diferentes)
     if (ffLegitDomainsSeen.has(d)) continue
     if (!proxyLoginSeen[d]) proxyLoginSeen[d] = { domain: e.domain, bundles: new Set(), hits: 0 }
     proxyLoginSeen[d].bundles.add(bid)
@@ -649,9 +703,12 @@ async function analyze(entries) {
   for (let e of netEntries) {
     let d = (e.domain || "").toLowerCase()
     let bid = e.bundleID || ""
+    // Se o bundle é o app legítimo do FF e o domínio é um domínio oficial de proxy/login do FF,
+    // não dispara como cheat — é tráfego normal do próprio jogo.
     if (FF_LEGIT_CALLERS.has(bid) && FF_PROXY_LOGIN_DOMAINS.has(d)) continue
     for (let [indicator, desc] of Object.entries(KNOWN_CHEAT_INFRA)) {
       if (d === indicator.toLowerCase() || d.endsWith("." + indicator.toLowerCase())) {
+        // Domínios que fazem parte do FF_PROXY_LOGIN_DOMAINS só são cheat se chamados por bundle não-legítimo
         if (FF_PROXY_LOGIN_DOMAINS.has(indicator.toLowerCase()) && FF_LEGIT_CALLERS.has(bid)) continue
         let existing = knownCheatFindings.find(k => k.indicator === indicator)
         if (existing) {
@@ -677,7 +734,7 @@ async function analyze(entries) {
     let chunk = allDomains.slice(i, i + CHUNK)
     let chunkNum = Math.floor(i / CHUNK) + 1
     let totalChunks = Math.ceil(allDomains.length / CHUNK)
-    console.log(`Lote ${chunkNum}/${totalChunks} — ${chunk.length} dominios`)
+    console.log(`Batch ${chunkNum}/${totalChunks} — ${chunk.length} dominios`)
 
     let results = await lookupBatch(chunk)
 
@@ -707,7 +764,7 @@ async function analyze(entries) {
 
       if (!severity && isTldSuspect) {
         severity = "HIGH"
-        reasons = [`TLD sospechoso: dominio con extensión de alto riesgo — patrón común en servidores de cheat`]
+        reasons = [`TLD suspeito: domínio com extensão de alto risco — padrão comum em servidores de cheat`]
       }
 
       if (!severity && !isTldSuspect) continue
@@ -732,7 +789,7 @@ async function analyze(entries) {
     if (i + CHUNK < allDomains.length) await wait(1400)
   }
 
-  console.log(`Iniciando probe HTTP en ${candidates.length} sospechosos...`)
+  console.log(`Iniciando probe HTTP em ${candidates.length} suspeitos...`)
   Speech.speak(S.probe)
   let probeResults = await Promise.all(candidates.map(c => probeHost(c.domain)))
 
@@ -747,10 +804,10 @@ async function analyze(entries) {
         reasons.push(`Servidor: ${probe.banner}`)
       }
       if (probe.status === 403) {
-        reasons.push("HTTP 403 — activo pero bloqueando acceso (patrón de proxy)")
+        reasons.push("HTTP 403 — ativo mas bloqueando acesso (padrão de proxy)")
       }
       if (!probe.online) {
-        reasons.push("Servidor offline o sin respuesta HTTP")
+        reasons.push("Servidor offline ou sem resposta HTTP")
       }
     }
 
@@ -787,14 +844,18 @@ async function analyze(entries) {
   })
 
   let ghostAppFindings = []
-
+  if (typeof window !== "undefined") {
+  } else {
+  }
   const GHOST_SUSPECT_DOMAINS = new Set(Object.keys(KNOWN_CHEAT_INFRA))
+  SUSPICIOUS_TLDS.forEach(t => {})
 
   let suspectByBundle = {}
   for (let e of netEntries) {
     let bid = e.bundleID || ""
     let dom = (e.domain || "").toLowerCase()
     if (!bid) continue
+    // Não flagra o app legítimo do FF acessando seus próprios domínios de proxy/login
     if (FF_LEGIT_CALLERS.has(bid) && FF_PROXY_LOGIN_DOMAINS.has(dom)) continue
     let isKnown = GHOST_SUSPECT_DOMAINS.has(dom)
     let isTld   = SUSPICIOUS_TLDS.some(t => dom.endsWith(t))
@@ -824,7 +885,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
 
   function fmtDt(d) {
     if (!d) return "?"
-    return d.toLocaleString("es-ES", {
+    return d.toLocaleString("pt-BR", {
       day:"2-digit", month:"2-digit", year:"numeric",
       hour:"2-digit", minute:"2-digit"
     })
@@ -860,13 +921,13 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
       if (diffFromNow >= 1440) {
         let d = Math.floor(diffFromNow / 1440)
         let h = Math.floor((diffFromNow % 1440) / 60)
-        staleStr = `hace ${d}d ${h}h`
+        staleStr = `${d}d ${h}h atrás`
       } else if (diffFromNow >= 60) {
         let h = Math.floor(diffFromNow / 60)
         let m = diffFromNow % 60
-        staleStr = `hace ${h}h ${m}min`
+        staleStr = `${h}h ${m}min atrás`
       } else {
-        staleStr = `hace ${diffFromNow} minutos`
+        staleStr = `${diffFromNow} minutos atrás`
       }
     }
   }
@@ -949,11 +1010,11 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     <div class="card critical" style="border-left-color:#ff4400;background:#140800;border-color:#3a1500;">
       <div class="card-header">
         <span class="badge critical" style="background:#1a0800;color:#ff4400;border-color:#ff440055;">&#128274; PROXY BYPASS LOGIN — CRÍTICO</span>
-        <span class="conns">${p.hits} conexiones</span>
+        <span class="conns">${p.hits} conexões</span>
       </div>
       <div class="card-domain">${p.domain}</div>
       <div class="grid">
-        <div class="row"><span class="label">Detección</span><span class="val reason" style="color:#ff6600;font-weight:bold">Dominio exclusivo de Free Fire llamado por app no autorizada — patrón de proxy interceptando login</span></div>
+        <div class="row"><span class="label">Detecção</span><span class="val reason" style="color:#ff6600;font-weight:bold">Domínio exclusivo do Free Fire chamado por app não autorizado — padrão de proxy interceptando login</span></div>
         <div class="row"><span class="label">App interceptor</span><span class="val">${bundleList}</span></div>
         <div class="row"><span class="label">Esperado de</span><span class="val"><span class="bundle" style="color:#44ff88">com.dts.freefireth</span> <span class="bundle" style="color:#44ff88">com.dts.freefiremax</span></span></div>
       </div>
@@ -963,31 +1024,32 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   for (let f of replaceFindings) {
     let label = f.isProxyApp
       ? "&#9888; APP DE PROXY DETECTADO"
-      : "&#9888; APP SIN REGISTRO EN EL DISPOSITIVO"
+      : "&#9888; APP SEM REGISTRO NO DISPOSITIVO"
     let desc = f.isProxyApp
-      ? `${f.appName} — activo en la red pero ausente en app_usage. Posible IPA falso instalado vía sideload y eliminado.`
-      : `${f.appName} — generó tráfico de red pero no consta como instalado en el archivo de análisis del dispositivo.`
+      ? `${f.appName} — ativo na rede mas ausente no app_usage. Possível IPA falso instalado via sideload e deletado.`
+      : `${f.appName} — gerou tráfego de rede mas não consta como instalado no arquivo de análise do dispositivo.`
     let domainRows = f.domains.slice(0, 6).map(d => `<span class="bundle">${d}</span>`).join(" ")
-    let extraDomains = f.domains.length > 6 ? `<span style="color:#888;font-size:10px"> +${f.domains.length - 6} dominios</span>` : ""
+    let extraDomains = f.domains.length > 6 ? `<span style="color:#888;font-size:10px"> +${f.domains.length - 6} domínios</span>` : ""
     criticalCards += `
     <div class="card critical">
       <div class="card-header">
         <span class="badge critical" style="${f.isProxyApp ? 'background:#1a0035;color:#ff00cc;border-color:#ff00cc55;' : ''}">${label}</span>
-        <span class="conns">${f.hits} conexiones</span>
+        <span class="conns">${f.hits} conexões</span>
       </div>
       <div class="card-domain">${f.bundleID}</div>
       <div class="grid">
-        <div class="row"><span class="label">Situación</span><span class="val reason" style="color:#ff44cc;font-weight:bold">${desc}</span></div>
-        <div class="row"><span class="label">Dominios<br><span class="sub">${f.domains.length} únicos</span></span><span class="val">${domainRows}${extraDomains}</span></div>
+        <div class="row"><span class="label">Situação</span><span class="val reason" style="color:#ff44cc;font-weight:bold">${desc}</span></div>
+        <div class="row"><span class="label">Domínios<br><span class="sub">${f.domains.length} únicos</span></span><span class="val">${domainRows}${extraDomains}</span></div>
       </div>
     </div>`
   }
+
 
   let ghostSection = ""
   if (ghostAppFindings && ghostAppFindings.length > 0) {
     let ghostRows = ghostAppFindings.map(g => {
       let domList = g.domains.slice(0,5).map(d => `<span class="ghost-domain">${d}</span>`).join("")
-      let more = g.domains.length > 5 ? `<span class="ghost-more">+${g.domains.length - 5} más</span>` : ""
+      let more = g.domains.length > 5 ? `<span class="ghost-more">+${g.domains.length - 5} mais</span>` : ""
       return `
       <div class="ghost-row">
         <div class="ghost-row-left">
@@ -996,7 +1058,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
         </div>
         <div class="ghost-row-right">
           <span class="ghost-hits">${g.hits} hits</span>
-          <span class="ghost-label" data-i18n="ghostNotInUsage">⚠ Ausente en app_usage</span>
+          <span class="ghost-label" data-i18n="ghostNotInUsage">⚠ Ausente no app_usage</span>
         </div>
       </div>`
     }).join("")
@@ -1005,30 +1067,30 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     <div class="ghost-header">
       <span class="ghost-icon">👻</span>
       <div class="ghost-title-block">
-        <div class="ghost-title" data-i18n="ghostTitle">Apps con dominios sospechosos — ausentes en app_usage</div>
-        <div class="ghost-sub" data-i18n="ghostSub">Presente en el reporte de red pero no encontrado en los datos de análisis</div>
+        <div class="ghost-title" data-i18n="ghostTitle">Apps com domínios suspeitos — ausentes no app_usage</div>
+        <div class="ghost-sub" data-i18n="ghostSub">Presente no relatório de rede mas não encontrado nos dados de análise</div>
       </div>
       <span class="ghost-count">${ghostAppFindings.length}</span>
     </div>
     <div class="ghost-rows">${ghostRows}</div>
-    <div class="ghost-hint" data-i18n="ghostHint">⚠ App puede haber sido instalado vía sideload o el archivo app_usage no cubre el período</div>
+    <div class="ghost-hint" data-i18n="ghostHint">⚠ App pode ter sido instalado via sideload ou o arquivo app_usage não cobre o período</div>
   </div>`
   }
 
   for (let k of knownCheatFindings) {
     let bundleList = k.bundles.map(b => `<span class="bundle">${b}</span>`).join(" ")
     let indicatorKind = (k.indicator.includes(".") && !k.indicator.match(/^\d+\.\d+/)) ? "domain" : "ip"
-    let indicatorText = indicatorKind === "domain" ? "Dominio" : "IP"
+    let indicatorText = indicatorKind === "domain" ? "Domínio" : "IP"
     criticalCards += `
     <div class="card critical">
       <div class="card-header">
         <span class="badge critical" data-badge-type="known-cheat">&#9888; CRÍTICO — CHEAT CONFIRMADO</span>
-        <span class="conns">${k.hits} conexiones</span>
+        <span class="conns">${k.hits} conexões</span>
       </div>
       <div class="card-domain">${k.indicator}</div>
       <div class="grid">
         <div class="row"><span class="label" data-i18n="labelCheat">Cheat</span><span class="val reason" style="color:#ff4444;font-weight:bold">${k.desc}</span></div>
-        <div class="row"><span class="label" data-i18n="labelIndicator">Indicador</span><span class="val" data-i18n-indicator="${indicatorKind}">${indicatorText} detectado en el reporte de red</span></div>
+        <div class="row"><span class="label" data-i18n="labelIndicator">Indicador</span><span class="val" data-i18n-indicator="${indicatorKind}">${indicatorText} detectado no relatório de rede</span></div>
         ${bundleList ? `<div class="row"><span class="label">Usado por</span><span class="val">${bundleList}</span></div>` : ""}
       </div>
     </div>`
@@ -1040,20 +1102,20 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     let suspectRows = suspectDomains.map(d => {
       let match = findings.find(f2 => f2.domain === d)
       let info = match ? ` &mdash; ${match.isp} (${match.country})` : ""
-      return `<div class="domain-row"><span class="domain-badge ${match ? match.severity.toLowerCase() : ""}" data-sev="${match ? match.severity : ""}">${match ? (match.severity === "HIGH" ? "SOSPECHOSO" : "POSIBLE") : ""}</span> ${d}${info}</div>`
+      return `<div class="domain-row"><span class="domain-badge ${match ? match.severity.toLowerCase() : ""}" data-sev="${match ? match.severity : ""}">${match ? (match.severity === "HIGH" ? "SUSPEITO" : "POSSÍVEL") : ""}</span> ${d}${info}</div>`
     }).join("")
     criticalCards += `
     <div class="card critical">
       <div class="card-header">
         <span class="badge critical">&#9888; CRÍTICO — APP PROXY/CHEAT</span>
-        <span class="conns">${f.hits} conexiones</span>
+        <span class="conns">${f.hits} conexões</span>
       </div>
       <div class="card-domain">${f.bundleID}</div>
       <div class="grid">
         <div class="row"><span class="label">App</span><span class="val reason">${f.desc}</span></div>
         <div class="row">
-          <span class="label">IPs sospechosas<br><span class="sub">${suspectDomains.length} de ${f.domains.length} dominios</span></span>
-          <span class="val">${suspectRows || '<span class="none">Ninguna IP sospechosa detectada</span>'}</span>
+          <span class="label">IPs suspeitos<br><span class="sub">${suspectDomains.length} de ${f.domains.length} domínios</span></span>
+          <span class="val">${suspectRows || '<span class="none">Nenhum IP suspeito detectado</span>'}</span>
         </div>
       </div>
     </div>`
@@ -1063,30 +1125,30 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
 
   let cards = ""
   if (displayFindings.length === 0) {
-    cards = `<div class="ok">&#10003; Ninguna IP VPS / Hosting / Proxy detectada.</div>`
+    cards = `<div class="ok">&#10003; Nenhum IP VPS / Hosting / Proxy detectado.</div>`
   } else {
     for (let f of displayFindings) {
-      let tag = f.tldSuspect ? "DOMINIO SOSPECHOSO" : f.hosting ? "VPS/HOSTING" : f.proxy ? "PROXY/VPN" : "NUBE"
+      let tag = f.tldSuspect ? "DOMÍNIO SUSPEITO" : f.hosting ? "VPS/HOSTING" : f.proxy ? "PROXY/VPN" : "NUVEM"
       let cls = f.tldSuspect ? "tld-flag" : f.severity === "HIGH" ? "high" : "medium"
-      let sev = f.tldSuspect ? "&#9888; DOMINIO SOSPECHOSO" : f.severity === "HIGH" ? "SOSPECHOSO" : "POSIBLE"
+      let sev = f.tldSuspect ? "&#9888; DOMÍNIO SUSPEITO" : f.severity === "HIGH" ? "SUSPEITO" : "POSSÍVEL"
       let bundleList = f.bundles.map(b => `<span class="bundle">${b}</span>`).join(" ")
       cards += `
       <div class="card ${cls}">
         <div class="card-header">
           <span class="badge ${cls}">${sev}</span>
-          <span class="conns">${f.hits} conexiones</span>
+          <span class="conns">${f.hits} conexões</span>
         </div>
         <div class="card-domain">${f.domain}</div>
         <div class="grid">
           <div class="row"><span class="label">IP</span><span class="val">${f.ip}</span></div>
           <div class="row"><span class="label" data-i18n="labelCountry">País</span><span class="val">${f.country} / ${f.city}</span></div>
-          <div class="row"><span class="label" data-i18n="labelProvider">Proveedor</span><span class="val isp">${f.isp}</span></div>
+          <div class="row"><span class="label" data-i18n="labelProvider">Provedor</span><span class="val isp">${f.isp}</span></div>
           <div class="row"><span class="label">Org</span><span class="val">${f.org}</span></div>
           ${f.reverse ? `<div class="row"><span class="label">rDNS</span><span class="val rdns">${f.reverse}</span></div>` : ""}
           ${f.probe ? `<div class="row"><span class="label">HTTP</span><span class="val">
             ${f.probe.online
-              ? `<span class="http-on">&#9679; En línea</span>${f.probe.status ? ` &mdash; HTTP ${f.probe.status}` : ""}${f.probe.banner ? ` &mdash; <span class="http-banner">${f.probe.banner}</span>` : ""}`
-              : `<span class="http-off">&#9679; Sin conexión / Sin respuesta</span>`
+              ? `<span class="http-on">&#9679; Online</span>${f.probe.status ? ` &mdash; HTTP ${f.probe.status}` : ""}${f.probe.banner ? ` &mdash; <span class="http-banner">${f.probe.banner}</span>` : ""}`
+              : `<span class="http-off">&#9679; Offline / Sem resposta</span>`
             }
           </span></div>` : ""}
           <div class="row"><span class="label" data-i18n="labelReason">Motivo</span><span class="val reason" data-reasons='${JSON.stringify(f.reasons)}'>${f.reasons.join("<br>")}</span></div>
@@ -1099,7 +1161,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   let uptimeBg    = uptimeWarning ? "background:linear-gradient(90deg,#2a1000,#1a0800)" : "background:#0d1b2a"
   let uptimeDotCl = uptimeWarning ? "background:#ff8800;box-shadow:0 0 6px #ff8800" : "background:#4caf50;box-shadow:0 0 6px #4caf50"
   let uptimeWarnBadge = uptimeWarning
-    ? `<span style="margin-left:8px;background:#3a1800;color:#ff8800;border:1px solid #ff8800;font-size:9px;padding:2px 7px;border-radius:10px;font-weight:bold" data-i18n="uptimeLess20">&#9888; MENOS DE 20MIN — ¡El reporte puede no cubrir la partida entera!</span>`
+    ? `<span style="margin-left:8px;background:#3a1800;color:#ff8800;border:1px solid #ff8800;font-size:9px;padding:2px 7px;border-radius:10px;font-weight:bold" data-i18n="uptimeLess20">&#9888; MENOS DE 20MIN — Relatório pode não cobrir a partida inteira!</span>`
     : ""
 
   let rootsWarn = ""
@@ -1108,9 +1170,9 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   <div class="roots-banner">
     <div class="roots-icon">🔐</div>
     <div>
-      <div class="roots-label" data-i18n="rootsLabel">Certificado Raíz Sospechoso</div>
-      <div class="roots-detail" data-roots-count="${ipsMeta.rootsInstalled}">${ipsMeta.rootsInstalled} certificado${ipsMeta.rootsInstalled > 1 ? "s" : ""} raíz instalado${ipsMeta.rootsInstalled > 1 ? "s" : ""} (roots_installed: ${ipsMeta.rootsInstalled})</div>
-      <div class="roots-hint" data-i18n="rootsHint">Certificados raíz permiten interceptar tráfico HTTPS — patrón común en proxy cheat tipo mitmproxy</div>
+      <div class="roots-label" data-i18n="rootsLabel">Certificado Raiz Suspeito</div>
+      <div class="roots-detail" data-roots-count="${ipsMeta.rootsInstalled}">${ipsMeta.rootsInstalled} certificado${ipsMeta.rootsInstalled > 1 ? "s" : ""} raiz instalado${ipsMeta.rootsInstalled > 1 ? "s" : ""} (roots_installed: ${ipsMeta.rootsInstalled})</div>
+      <div class="roots-hint" data-i18n="rootsHint">Certificados raiz permitem interceptar tráfego HTTPS — padrão de proxy cheat tipo mitmproxy</div>
     </div>
   </div>`
   }
@@ -1121,14 +1183,14 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
       <div class="ips-row ips-row-${f.category || 'warning'}">
         <div class="ips-row-left">
           <div class="ips-row-top">
-            <span class="ips-cat-badge ips-cat-${f.category || 'warning'}">${f.category === 'critical' ? '🚨 CRÍTICO' : f.category === 'vpn' ? '🔒 VPN/PROXY' : f.category === 'developer' ? '🛠 DEVELOPER' : '⚠ SOSPECHOSO'}</span>
+            <span class="ips-cat-badge ips-cat-${f.category || 'warning'}">${f.category === 'critical' ? '🚨 CRÍTICO' : f.category === 'vpn' ? '🔒 VPN/PROXY' : f.category === 'developer' ? '🛠 DEVELOPER' : '⚠ SUSPEITO'}</span>
           </div>
           <span class="ips-bundle">${f.bundleId}</span>
           <span class="ips-reason" data-reason-key="${encodeURIComponent(f.bundleId)}">${f.reason}</span>
         </div>
         <div class="ips-row-right">
           <span class="ips-version">v${f.version}</span>
-          <span class="ips-badge ${f.eventType === 'launches' ? 'launched' : 'installed'}" data-i18n="${f.eventType === 'launches' ? 'ipsLaunched' : 'ipsInstalled'}">${f.eventType === 'launches' ? '▶ Abierto' : '⬇ Instalado'}</span>
+          <span class="ips-badge ${f.eventType === 'launches' ? 'launched' : 'installed'}" data-i18n="${f.eventType === 'launches' ? 'ipsLaunched' : 'ipsInstalled'}">${f.eventType === 'launches' ? '▶ Aberto' : '⬇ Instalado'}</span>
         </div>
       </div>`).join("")
 
@@ -1137,13 +1199,13 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     <div class="ips-header">
       <span class="ips-icon">📲</span>
       <div class="ips-header-text">
-        <div class="ips-title" data-i18n="ipsTitle">Apps Sospechosas Instaladas</div>
-        <div class="ips-sub" data-i18n="ipsSub">Detectadas en el historial de uso del dispositivo</div>
+        <div class="ips-title" data-i18n="ipsTitle">Apps Suspeitos Instalados</div>
+        <div class="ips-sub" data-i18n="ipsSub">Detectados no histórico de uso do dispositivo</div>
       </div>
       <span class="ips-count">${ipsFindings.length}</span>
     </div>
     <div class="ips-rows">${ipsRows}</div>
-    <div class="ips-hint" data-i18n="ipsHint">⚠ Apps encontradas en los datos de análisis del iPhone — indican presencia de herramientas de cheat/jailbreak/proxy</div>
+    <div class="ips-hint" data-i18n="ipsHint">⚠ Apps encontrados nos dados de análise do iPhone — indicam presença de ferramentas de cheat/jailbreak/proxy</div>
   </div>`
   }
 
@@ -1151,9 +1213,9 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   <div class="stale-banner">
     <div class="stale-left">&#128337;</div>
     <div>
-      <div class="stale-label">Archivo posiblemente antiguo</div>
+      <div class="stale-label">Arquivo possivelmente antigo</div>
       <div class="stale-time">Último registro: <strong>${staleStr}</strong></div>
-      <div class="stale-hint">Sospecha: archivo generado fuera del período de la partida para esconder actividad.</div>
+      <div class="stale-hint">Suspeita: arquivo gerado fora do período da partida para esconder atividade.</div>
     </div>
   </div>` : ""
 
@@ -1167,7 +1229,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
 
   let ffSessionRows = ffSessions.map((s, i) => {
     let col = loginColor(s.loginType)
-    let label = i === 0 ? "Última apertura" : i === 1 ? "2ª apertura" : "3ª apertura"
+    let label = i === 0 ? "Última abertura" : i === 1 ? "2ª abertura" : "3ª abertura"
     return `
       <div class="ff-session-row">
         <div class="ff-session-left">
@@ -1182,10 +1244,10 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   <div class="ff-banner">
     <div class="ff-left">&#128293;</div>
     <div class="ff-info">
-      <div class="ff-label">${ffVersion || "Free Fire"} — Sesiones en el período</div>
+      <div class="ff-label">${ffVersion || "Free Fire"} — Sessões no período</div>
       ${ffSessionRows}
-      <div class="ff-sessions">${ffEntries.length} inicializaciones registradas en el período</div>
-      <div class="ff-hint">Si la última apertura fue después de la partida &rarr; ¡aplica el W.O!</div>
+      <div class="ff-sessions">${ffEntries.length} inicializações registradas no período</div>
+      <div class="ff-hint">Se a última abertura foi após a partida &rarr; aplique o W.O!</div>
     </div>
   </div>` : ""
 
@@ -1193,9 +1255,9 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   <div class="appstore-banner">
     <div class="appstore-left">&#128722;</div>
     <div>
-      <div class="appstore-label">App Store abierta</div>
+      <div class="appstore-label">App Store aberta</div>
       <div class="appstore-time">${appStoreStr}</div>
-      <div class="appstore-hint">Si fue después de la partida &rarr; ¡aplica el W.O!</div>
+      <div class="appstore-hint">Se foi após a partida &rarr; aplique o W.O!</div>
     </div>
   </div>` : ""
 
@@ -1208,6 +1270,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   * { box-sizing:border-box; margin:0; padding:0; }
   body { background:#0a0a0f; color:#e0e0e0; font-family:-apple-system,ui-monospace,monospace; font-size:13px; }
 
+  /* HERO */
   .hero {
     background: linear-gradient(160deg, #0d1b2a 0%, #0a0a12 70%);
     border-bottom: 1px solid #1a2a3a;
@@ -1258,6 +1321,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   .hg-card-warn  { background:#1a0a00 !important; border-color:#ff880055 !important; }
   .hg-card-full  { grid-column: 1 / -1; }
 
+  /* LANGUAGE SELECTOR */
   .lang-bar {
     display:flex; justify-content:center; gap:6px; margin-bottom:14px;
   }
@@ -1270,6 +1334,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   .lang-btn:hover { border-color:#00e5ff55; color:#00e5ffaa; }
   .lang-btn.active { background:#001a22; border-color:#00e5ff; color:#00e5ff; }
 
+  /* UPTIME BAR */
   .uptime-bar {
     border-bottom:1px solid #1a2a3a;
     padding:10px 16px;
@@ -1283,8 +1348,10 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   .uptime-text { font-size:11px; color:#889; }
   .uptime-text strong { color:#fff; }
 
+  /* CONTENT */
   .content { padding:16px; }
 
+  /* APP STORE BANNER */
   .appstore-banner {
     display:flex; align-items:center; gap:14px;
     background:linear-gradient(135deg,#1c1800,#241f00);
@@ -1296,6 +1363,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   .appstore-time  { font-size:18px; font-weight:bold; color:#ffe500; margin:3px 0; }
   .appstore-hint  { font-size:10px; color:#8a7700; }
 
+  /* SUMMARY */
   .summary { display:flex; gap:8px; margin-bottom:20px; }
   .stat {
     flex:1; background:#0d1520; border-radius:10px;
@@ -1304,6 +1372,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   .stat .num { font-size:28px; font-weight:bold; line-height:1; }
   .stat .lbl { font-size:9px; color:#446; margin-top:4px; letter-spacing:1px; text-transform:uppercase; }
 
+  /* SECTION HEADERS */
   .section-header {
     display:flex; align-items:center; gap:10px;
     margin-bottom:14px; margin-top:6px;
@@ -1333,6 +1402,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   .sh-medium .sh-count { background:#2a2000; color:#ffbb00; border:1px solid #ffbb0044; }
   .divider { height:1px; background:#1a2a3a; margin:20px 0; }
 
+  /* CARDS */
   .card {
     background:#0d1520; border-radius:12px;
     margin-bottom:12px; overflow:hidden;
@@ -1491,6 +1561,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   }
   .ff-hint  { font-size:10px; color:#4a7700; margin-top:3px; }
 
+  /* PRE-LOGIN BANNER */
   .prelim-banner {
     background:linear-gradient(135deg,#1a0000,#240808);
     border:1px solid #8a0000; border-radius:12px;
@@ -1545,18 +1616,18 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
 <body>
 
 <div class="hero">
-  <div class="hero-eyebrow">Escáner iOS</div>
+  <div class="hero-eyebrow">Scanner iOS</div>
   <div class="hero-name">Fantasma<span>SS</span></div>
   <div class="hero-credits">por <span class="credit-name">Fantasma</span> &middot; <span class="credit-name">Samir</span> &middot; <span class="credit-name">Katiau</span></div>
   <div class="lang-bar">
-    <button class="lang-btn" id="btn-pt">PT-BR</button>
+    <button class="lang-btn active" id="btn-pt">PT-BR</button>
     <button class="lang-btn" id="btn-en">EN</button>
-    <button class="lang-btn active" id="btn-es">ES</button>
+    <button class="lang-btn" id="btn-es">ES</button>
   </div>
-  <div class="hero-file"><strong>Archivo:</strong> ${filename}</div>
+  <div class="hero-file"><strong>Arquivo:</strong> ${filename}</div>
   <div class="hero-grid">
     <div class="hg-card">
-      <div class="hg-label">Inicio</div>
+      <div class="hg-label">Início</div>
       <div class="hg-val">${startStr}</div>
     </div>
     <div class="hg-card">
@@ -1564,19 +1635,19 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
       <div class="hg-val">${endStr}</div>
     </div>
     <div class="hg-card">
-      <div class="hg-label">Dominios únicos</div>
+      <div class="hg-label">Domínios únicos</div>
       <div class="hg-val cyan">${allDomains.size}</div>
     </div>
     <div class="hg-card">
-      <div class="hg-label">Total de conexiones</div>
+      <div class="hg-label">Total conexões</div>
       <div class="hg-val">${netEntries.length}</div>
     </div>
     ${ipsMeta && ipsMeta.iosVersion ? `<div class="hg-card${ipsMeta.rootsInstalled > 0 ? "" : " hg-card-full"}">
-      <div class="hg-label" data-i18n="iosVersionLabel">Versión iOS</div>
+      <div class="hg-label" data-i18n="iosVersionLabel">Versão iOS</div>
       <div class="hg-val cyan">${ipsMeta.iosVersion}</div>
     </div>` : ""}
     ${ipsMeta && ipsMeta.rootsInstalled > 0 ? `<div class="hg-card hg-card-warn">
-      <div class="hg-label" data-i18n="rootsCardLabel">⚠ Certificados raíz</div>
+      <div class="hg-label" data-i18n="rootsCardLabel">⚠ Certificados raiz</div>
       <div class="hg-val warn">${ipsMeta.rootsInstalled} instalado${ipsMeta.rootsInstalled > 1 ? "s" : ""}</div>
     </div>` : ""}
   </div>
@@ -1584,7 +1655,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
 
 <div class="uptime-bar" style="${uptimeBg}">
   <div class="uptime-dot" style="${uptimeDotCl}"></div>
-  <div class="uptime-text">Monitoreado hace <strong>${uptimeStr}</strong></div>
+  <div class="uptime-text">Monitorado há <strong>${uptimeStr}</strong></div>
   ${uptimeWarnBadge}
 </div>
 
@@ -1601,11 +1672,11 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     </div>
     <div class="stat">
       <div class="num" style="color:#ff5555">${highCount}</div>
-      <div class="lbl">Sospechoso</div>
+      <div class="lbl">Suspeito</div>
     </div>
     <div class="stat">
       <div class="num" style="color:#ffbb00">${medCount}</div>
-      <div class="lbl">Posible</div>
+      <div class="lbl">Possível</div>
     </div>
   </div>
 
@@ -1613,8 +1684,8 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   <div class="section-header sh-critical">
     <div class="sh-icon">&#9888;</div>
     <div class="sh-text">
-      <div class="sh-title">Apps Proxy / Cheat Detectadas</div>
-      <div class="sh-sub">Aplicaciones e infraestructura conocida de cheats</div>
+      <div class="sh-title">Apps Proxy / Cheat Detectados</div>
+      <div class="sh-sub">Aplicativos e infraestrutura conhecida de cheats</div>
     </div>
     <div class="sh-count">${criticalCount}</div>
   </div>
@@ -1628,7 +1699,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   <div class="section-header sh-high">
     <div class="sh-icon">&#128683;</div>
     <div class="sh-text">
-      <div class="sh-title">IPs Sospechosas</div>
+      <div class="sh-title">IPs Suspeitos</div>
       <div class="sh-sub">VPS / Hosting / Proxy confirmados</div>
     </div>
     <div class="sh-count">${highCount}</div>
@@ -1638,8 +1709,8 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   <div class="section-header sh-medium">
     <div class="sh-icon">&#128308;</div>
     <div class="sh-text">
-      <div class="sh-title">IPs Posibles</div>
-      <div class="sh-sub">Infraestructura cloud / datacenter</div>
+      <div class="sh-title">IPs Possíveis</div>
+      <div class="sh-sub">Infraestrutura cloud / datacenter</div>
     </div>
     <div class="sh-count">${medCount}</div>
   </div>` : ""}
@@ -1651,8 +1722,8 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   <div class="section-header sh-medium">
     <div class="sh-icon">&#9888;</div>
     <div class="sh-text">
-      <div class="sh-title">IPs Posibles</div>
-      <div class="sh-sub">Infraestructura cloud / datacenter</div>
+      <div class="sh-title">IPs Possíveis</div>
+      <div class="sh-sub">Infraestrutura cloud / datacenter</div>
     </div>
     <div class="sh-count">${medCount}</div>
   </div>` : ""}
@@ -1663,17 +1734,17 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   return rawHtml
 }
 
-function getLangScriptText() {
+function buildLangScript() {
   return `<script>
 var TRANSLATIONS = {
   pt: {
-    eyebrow: "Escáner iOS",
-    credits: "por Fantasma @uszoo · Juniormodz · Tecamodz",
-    fileLabel: "Archivo:",
-    start: "Inicio",
+    eyebrow: "Scanner iOS",
+    credits: "por Fantasma · Samir · Katiau",
+    fileLabel: "Arquivo:",
+    start: "Início",
     lastRecord: "Último registro",
-    uniqueDomains: "Dominios únicos",
-    totalConns: "Total de conexões",
+    uniqueDomains: "Domínios únicos",
+    totalConns: "Total conexões",
     monitoredFor: "Monitorado há",
     criticalLabel: "Crítico",
     suspectLabel: "Suspeito",
@@ -1697,15 +1768,477 @@ var TRANSLATIONS = {
     noneDetected: "Nenhum IP suspeito detectado",
     noVPS: "✓ Nenhum IP VPS / Hosting / Proxy detectado.",
     staleLabel: "Arquivo possivelmente antigo",
-    staleHint: "Suspeita: arquivo gerado fora do período da partida para ocultar atividade.",
+    staleHint: "Suspeita: arquivo gerado fora do período da partida para esconder atividade.",
     ffLabel: "Sessões no período",
     ffLastOpen: "Última abertura",
     ffFirstOpen: "Primeira abertura",
     ffSessions: "inicializações registradas no período",
-    ffHint: "Se a última abertura foi depois da partida → aplique W.O!",
+    ffHint: "Se a última abertura foi após a partida → aplique o W.O!",
     appStoreLabel: "App Store aberta",
-    appStoreHint: "Se foi depois da partida → aplique W.O!",
-    uptimeLess20: "MENOS DE 20MIN — O relatório pode não cobrir a partida inteira!",
+    appStoreHint: "Se foi após a partida → aplique o W.O!",
+    uptimeLess20: "MENOS DE 20MIN — Relatório pode não cobrir a partida inteira!",
+    badgeCritical: "⚠ CRÍTICO — APP PROXY/CHEAT",
+    badgeSuspect: "SUSPEITO",
+    badgePossible: "POSSÍVEL",
+    badgeDomainSuspect: "⚠ DOMÍNIO SUSPEITO",
+    of: "de",
+    online: "● Online",
+    offline: "● Offline / Sem resposta",
+    lastRecord2: "Último registro:",
+    conns: "conexões",
+    domains: "domínios",
+    labelCheat: "Cheat",
+    labelIndicator: "Indicador",
+    indicatorDomain: "Domínio detectado no relatório de rede",
+    indicatorIP: "IP detectado no relatório de rede",
+    iosVersionLabel: "Versão iOS",
+    rootsCardLabel: "⚠ Certificados raiz",
+    rootsLabel: "Certificado Raiz Suspeito",
+    rootsDetail1: "certificado raiz instalado",
+    rootsDetailN: "certificados raiz instalados",
+    rootsHint: "Certificados raiz permitem interceptar tráfego HTTPS — padrão de proxy cheat tipo mitmproxy",
+    ipsTitle: "Apps Suspeitos Instalados",
+    ipsSub: "Detectados no histórico de uso do dispositivo",
+    ipsHint: "⚠ Apps encontrados nos dados de análise do iPhone — indicam presença de ferramentas de cheat/jailbreak/proxy",
+    ipsLaunched: "▶ Aberto",
+    ipsInstalled: "⬇ Instalado",
+    badgeKnownCheat: "⚠ CRÍTICO — CHEAT CONFIRMADO",
+    reasonTLD: function(tld){ return "TLD suspeito detectado: \"" + tld + "\" — padrão comum em cheats/proxies"; },
+    reasonWord: function(word){ return "Palavra suspeita no domínio: \"" + word + "\""; },
+    reasonVPS: function(isp){ return "VPS/HOSTING — ISP: " + isp; },
+    reasonProxy: "PROXY / VPN detectado",
+    reasonCF: function(asn){ return "Cloudflare acessado via IP direto — padrão de proxy cheat (" + asn + ")"; },
+    reasonASN: function(asn,desc){ return "ASN de cheat proxy conhecido: " + asn + " — " + desc; },
+    reasonRDNS: function(rdns){ return "rDNS de servidor: " + rdns; },
+    reasonHostinger: function(rdns){ return "Hostinger VPS (padrao cheat proxy BR): " + rdns; },
+    reasonNoRDNS: "Sem rDNS (PTR) — tipico de VPS usado como proxy",
+    reasonOrg: function(kw){ return "Org/ISP associado a hospedagem/cheat proxy: " + kw; },
+  },
+  en: {
+    eyebrow: "iOS Scanner",
+    credits: "by Fantasma · Juniormodz · Teca",
+    fileLabel: "File:",
+    start: "Start",
+    lastRecord: "Last record",
+    uniqueDomains: "Unique domains",
+    totalConns: "Total connections",
+    monitoredFor: "Monitored for",
+    criticalLabel: "Critical",
+    suspectLabel: "Suspicious",
+    possibleLabel: "Possible",
+    appProxyTitle: "Proxy / Cheat Apps Detected",
+    appProxySub: "Known traffic interception applications",
+    suspectIPsTitle: "Suspicious IPs",
+    suspectIPsSub: "VPS / Hosting / Confirmed Proxy",
+    possibleIPsTitle: "Possible IPs",
+    possibleIPsSub: "Cloud / datacenter infrastructure",
+    labelIP: "IP",
+    labelCountry: "Country",
+    labelProvider: "Provider",
+    labelOrg: "Org",
+    labelRDNS: "rDNS",
+    labelHTTP: "HTTP",
+    labelReason: "Reason",
+    labelUsedBy: "Used by",
+    labelApp: "App",
+    labelSuspectIPs: "Suspicious IPs",
+    noneDetected: "No suspicious IPs detected",
+    noVPS: "✓ No VPS / Hosting / Proxy IPs detected.",
+    staleLabel: "File possibly outdated",
+    staleHint: "Suspicion: file generated outside the match period to hide activity.",
+    ffLabel: "Sessions in period",
+    ffLastOpen: "Last opened",
+    ffFirstOpen: "First opened",
+    ffSessions: "startups recorded in the period",
+    ffHint: "If last opened after the match → apply W.O!",
+    appStoreLabel: "App Store opened",
+    appStoreHint: "If it was after the match → apply W.O!",
+    uptimeLess20: "LESS THAN 20MIN — Report may not cover the entire match!",
+    badgeCritical: "⚠ CRITICAL — PROXY/CHEAT APP",
+    badgeSuspect: "SUSPICIOUS",
+    badgePossible: "POSSIBLE",
+    badgeDomainSuspect: "⚠ SUSPICIOUS DOMAIN",
+    of: "of",
+    online: "● Online",
+    offline: "● Offline / No response",
+    lastRecord2: "Last record:",
+    conns: "connections",
+    domains: "domains",
+    labelCheat: "Cheat",
+    labelIndicator: "Indicator",
+    indicatorDomain: "Domain detected in network report",
+    indicatorIP: "IP detected in network report",
+    iosVersionLabel: "iOS Version",
+    rootsCardLabel: "⚠ Root certificates",
+    rootsLabel: "Suspicious Root Certificate",
+    rootsDetail1: "root certificate installed",
+    rootsDetailN: "root certificates installed",
+    rootsHint: "Root certificates allow HTTPS traffic interception — common pattern in mitmproxy-type cheat tools",
+    ipsTitle: "Suspicious Apps Installed",
+    ipsSub: "Detected in device usage history",
+    ipsHint: "⚠ Apps found in iPhone analytics data — indicate presence of cheat/jailbreak/proxy tools",
+    ipsLaunched: "▶ Opened",
+    ipsInstalled: "⬇ Installed",
+    badgeKnownCheat: "⚠ CRITICAL — CONFIRMED CHEAT",
+    reasonTLD: function(tld){ return "Suspicious TLD detected: \"" + tld + "\" — common pattern in cheats/proxies"; },
+    reasonWord: function(word){ return "Suspicious word in domain: \"" + word + "\""; },
+    reasonVPS: function(isp){ return "VPS/HOSTING — ISP: " + isp; },
+    reasonProxy: "PROXY / VPN detected",
+    reasonCF: function(asn){ return "Cloudflare accessed via direct IP — cheat proxy pattern (" + asn + ")"; },
+    reasonASN: function(asn,desc){ return "Known cheat proxy ASN: " + asn + " — " + desc; },
+    reasonRDNS: function(rdns){ return "Server rDNS: " + rdns; },
+    reasonHostinger: function(rdns){ return "Hostinger VPS (known BR cheat proxy pattern): " + rdns; },
+    reasonNoRDNS: "No rDNS (PTR) — typical of VPS used as proxy",
+    reasonOrg: function(kw){ return "Org/ISP associated with hosting/cheat proxy: " + kw; },
+  },
+  es: {
+    eyebrow: "Scanner iOS",
+    credits: "por Fantasma · Juniormodz · Tecas",
+    fileLabel: "Archivo:",
+    start: "Inicio",
+    lastRecord: "Último registro",
+    uniqueDomains: "Dominios únicos",
+    totalConns: "Total conexiones",
+    monitoredFor: "Monitoreado hace",
+    criticalLabel: "Crítico",
+    suspectLabel: "Sospechoso",
+    possibleLabel: "Posible",
+    appProxyTitle: "Apps Proxy / Cheat Detectadas",
+    appProxySub: "Aplicaciones conocidas de interceptación de tráfico",
+    suspectIPsTitle: "IPs Sospechosas",
+    suspectIPsSub: "VPS / Hosting / Proxy confirmados",
+    possibleIPsTitle: "IPs Posibles",
+    possibleIPsSub: "Infraestructura cloud / datacenter",
+    labelIP: "IP",
+    labelCountry: "País",
+    labelProvider: "Proveedor",
+    labelOrg: "Org",
+    labelRDNS: "rDNS",
+    labelHTTP: "HTTP",
+    labelReason: "Motivo",
+    labelUsedBy: "Usado por",
+    labelApp: "App",
+    labelSuspectIPs: "IPs sospechosas",
+    noneDetected: "Ninguna IP sospechosa detectada",
+    noVPS: "✓ Ninguna IP VPS / Hosting / Proxy detectada.",
+    staleLabel: "Archivo posiblemente antiguo",
+    staleHint: "Sospecha: archivo generado fuera del período del partido para ocultar actividad.",
+    ffLabel: "Sesiones en el período",
+    ffLastOpen: "Última apertura",
+    ffFirstOpen: "Primera apertura",
+    ffSessions: "inicializaciones registradas en el período",
+    ffHint: "Si la última apertura fue después del partido → ¡aplica el W.O!",
+    appStoreLabel: "App Store abierta",
+    appStoreHint: "Si fue después del partido → ¡aplica el W.O!",
+    uptimeLess20: "MENOS DE 20MIN — ¡El informe puede no cubrir toda la partida!",
+    badgeCritical: "⚠ CRÍTICO — APP PROXY/CHEAT",
+    badgeSuspect: "SOSPECHOSO",
+    badgePossible: "POSIBLE",
+    badgeDomainSuspect: "⚠ DOMINIO SOSPECHOSO",
+    of: "de",
+    online: "● En línea",
+    offline: "● Sin conexión / Sin respuesta",
+    lastRecord2: "Último registro:",
+    conns: "conexiones",
+    domains: "dominios",
+    labelCheat: "Cheat",
+    labelIndicator: "Indicador",
+    indicatorDomain: "Dominio detectado en el informe de red",
+    indicatorIP: "IP detectada en el informe de red",
+    iosVersionLabel: "Versión iOS",
+    rootsCardLabel: "⚠ Certificados raíz",
+    rootsLabel: "Certificado Raíz Sospechoso",
+    rootsDetail1: "certificado raíz instalado",
+    rootsDetailN: "certificados raíz instalados",
+    rootsHint: "Los certificados raíz permiten interceptar tráfico HTTPS — patrón común en cheats tipo mitmproxy",
+    ipsTitle: "Apps Sospechosas Instaladas",
+    ipsSub: "Detectadas en el historial de uso del dispositivo",
+    ipsHint: "⚠ Apps encontradas en los datos de análisis del iPhone — indican presencia de herramientas de cheat/jailbreak/proxy",
+    ipsLaunched: "▶ Abierta",
+    ipsInstalled: "⬇ Instalada",
+    badgeKnownCheat: "⚠ CRÍTICO — CHEAT CONFIRMADO",
+    reasonTLD: function(tld){ return "TLD sospechoso detectado: \"" + tld + "\" — patrón común en cheats/proxies"; },
+    reasonWord: function(word){ return "Palabra sospechosa en el dominio: \"" + word + "\""; },
+    reasonVPS: function(isp){ return "VPS/HOSTING — ISP: " + isp; },
+    reasonProxy: "PROXY / VPN detectado",
+    reasonCF: function(asn){ return "Cloudflare accedido vía IP directa — patrón de proxy cheat (" + asn + ")"; },
+    reasonASN: function(asn,desc){ return "ASN de proxy cheat conocido: " + asn + " — " + desc; },
+    reasonRDNS: function(rdns){ return "rDNS de servidor: " + rdns; },
+    reasonHostinger: function(rdns){ return "Hostinger VPS (patrón proxy cheat BR conocido): " + rdns; },
+    reasonNoRDNS: "Sin rDNS (PTR) — típico de VPS usado como proxy",
+    reasonOrg: function(kw){ return "Org/ISP asociado a hosting/proxy cheat: " + kw; },
+  }
+};
+
+function setLang(lang) {
+  const t = TRANSLATIONS[lang];
+  if (!t) return;
+
+  ['pt','en','es'].forEach(function(l) {
+    var btn = document.getElementById('btn-' + l);
+    if (btn) btn.classList.toggle('active', l === lang);
+  });
+
+  function q(sel) { return Array.from(document.querySelectorAll(sel)); }
+
+  q('.hero-eyebrow').forEach(function(el){ el.textContent = t.eyebrow; });
+  q('.hero-credits').forEach(function(el){ el.textContent = t.credits; });
+  q('.hero-file strong').forEach(function(el){ el.textContent = t.fileLabel; });
+
+  var hgLabels = q('.hg-label');
+  ['start','lastRecord','uniqueDomains','totalConns'].forEach(function(k,i){
+    if (hgLabels[i]) hgLabels[i].textContent = t[k];
+  });
+
+  // data-i18n generic handler
+  q('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if (t[key] && typeof t[key] === 'string') el.textContent = t[key];
+  });
+
+  // indicator value (domain vs IP)
+  q('[data-i18n-indicator]').forEach(function(el){
+    var kind = el.getAttribute('data-i18n-indicator');
+    el.textContent = kind === 'domain' ? t.indicatorDomain : t.indicatorIP;
+  });
+
+  // roots-detail with count
+  q('[data-roots-count]').forEach(function(el){
+    var n = parseInt(el.getAttribute('data-roots-count'), 10);
+    var label = n > 1 ? t.rootsDetailN : t.rootsDetail1;
+    el.textContent = n + ' ' + label + ' (roots_installed: ' + n + ')';
+  });
+
+  // domain-badge inline SUSPEITO/POSSÍVEL
+  q('[data-sev]').forEach(function(el){
+    var sev = el.getAttribute('data-sev');
+    if (sev === 'HIGH') el.textContent = t.badgeSuspect;
+    else if (sev === 'MEDIUM') el.textContent = t.badgePossible;
+  });
+
+  // reasons translation via data-reasons
+  q('[data-reasons]').forEach(function(el){
+    try {
+      var reasons = JSON.parse(el.getAttribute('data-reasons'));
+      var translated = reasons.map(function(r) {
+        // match each reason pattern and translate
+        var m;
+        if ((m = r.match(/TLD suspeito detectado: "([^"]+)"/)) || (m = r.match(/Suspicious TLD detected: "([^"]+)"/)) || (m = r.match(/TLD sospechoso detectado: "([^"]+)"/))) return t.reasonTLD(m[1]);
+        if ((m = r.match(/Palavra suspeita no domínio: "([^"]+)"/)) || (m = r.match(/Suspicious word in domain: "([^"]+)"/)) || (m = r.match(/Palabra sospechosa en el dominio: "([^"]+)"/))) return t.reasonWord(m[1]);
+        if ((m = r.match(/VPS\/HOSTING — ISP: (.+)/))) return t.reasonVPS(m[1]);
+        if (r.match(/PROXY \/ VPN/)) return t.reasonProxy;
+        if ((m = r.match(/Cloudflare[^(]+\((\w+)\)/))) return t.reasonCF(m[1]);
+        if ((m = r.match(/ASN[^:]+: (\w+) — (.+)/))) return t.reasonASN(m[1], m[2]);
+        if ((m = r.match(/Hostinger VPS[^:]+: (.+)/))) return t.reasonHostinger(m[1]);
+        if ((m = r.match(/rDNS de servidor: (.+)/) || r.match(/Server rDNS: (.+)/))) return t.reasonRDNS(m[1]);
+        if (r.match(/Sem rDNS|No rDNS|Sin rDNS/)) return t.reasonNoRDNS;
+        if ((m = r.match(/Org\/ISP[^:]+: (.+)/) || r.match(/Org\/ISP[^:]+: (.+)/))) return t.reasonOrg(m[1]);
+        return r; // fallback: keep original
+      });
+      el.innerHTML = translated.join('<br>');
+    } catch(e) {}
+  });
+
+  q('.uptime-text').forEach(function(el){
+    var strong = el.querySelector('strong');
+    if (strong) {
+      var val = strong.textContent;
+      while (el.firstChild) el.removeChild(el.firstChild);
+      el.appendChild(document.createTextNode(t.monitoredFor + ' '));
+      var ns = document.createElement('strong');
+      ns.textContent = val;
+      el.appendChild(ns);
+    }
+  });
+
+  q('.uptime-bar span').forEach(function(el){
+    if (el.style && el.style.marginLeft) el.innerHTML = '&#9888; ' + t.uptimeLess20;
+  });
+
+  var statLabels = q('.stat .lbl');
+  ['criticalLabel','suspectLabel','possibleLabel'].forEach(function(k,i){
+    if (statLabels[i]) statLabels[i].textContent = t[k];
+  });
+
+  q('.section-header').forEach(function(sh){
+    var title = sh.querySelector('.sh-title');
+    var sub   = sh.querySelector('.sh-sub');
+    if (!title) return;
+    if (sh.classList.contains('sh-critical')) {
+      title.textContent = t.appProxyTitle;
+      if (sub) sub.textContent = t.appProxySub;
+    } else if (sh.classList.contains('sh-high')) {
+      title.textContent = t.suspectIPsTitle;
+      if (sub) sub.textContent = t.suspectIPsSub;
+    } else if (sh.classList.contains('sh-medium')) {
+      title.textContent = t.possibleIPsTitle;
+      if (sub) sub.textContent = t.possibleIPsSub;
+    }
+  });
+
+  q('.stale-label').forEach(function(el){ el.textContent = t.staleLabel; });
+  q('.stale-hint').forEach(function(el){ el.textContent = t.staleHint; });
+  q('.stale-time').forEach(function(el){
+    var strong = el.querySelector('strong');
+    if (strong) {
+      var tv = strong.textContent;
+      while (el.firstChild) el.removeChild(el.firstChild);
+      el.appendChild(document.createTextNode(t.lastRecord2 + ' '));
+      var ns2 = document.createElement('strong');
+      ns2.textContent = tv;
+      el.appendChild(ns2);
+    }
+  });
+
+  q('.ff-label').forEach(function(el){
+    var version = el.textContent.indexOf('MAX') !== -1 ? 'Free Fire MAX' : 'Free Fire';
+    el.textContent = version + ' — ' + t.ffLabel;
+  });
+  var ffTags = q('.ff-tag');
+  [t.ffLastOpen, t.ffFirstOpen].forEach(function(v,i){
+    if (ffTags[i]) ffTags[i].textContent = v;
+  });
+  q('.ff-sessions').forEach(function(el){
+    var num = el.textContent.match(/\d+/);
+    if (num) el.textContent = num[0] + ' ' + t.ffSessions;
+  });
+  q('.ff-hint').forEach(function(el){ el.textContent = t.ffHint; });
+
+  q('.appstore-label').forEach(function(el){ el.textContent = t.appStoreLabel; });
+  q('.appstore-hint').forEach(function(el){ el.textContent = t.appStoreHint; });
+
+  q('.ok').forEach(function(el){ el.textContent = t.noVPS; });
+
+  var labelMap = {
+    'IP': 'labelIP',
+    'País': 'labelCountry', 'Country': 'labelCountry', 'País': 'labelCountry',
+    'Provedor': 'labelProvider', 'Provider': 'labelProvider', 'Proveedor': 'labelProvider',
+    'Org': 'labelOrg',
+    'rDNS': 'labelRDNS',
+    'HTTP': 'labelHTTP',
+    'Motivo': 'labelReason', 'Reason': 'labelReason', 'Motivo': 'labelReason',
+    'Usado por': 'labelUsedBy', 'Used by': 'labelUsedBy', 'Usado por': 'labelUsedBy',
+    'App': 'labelApp',
+    'Cheat': 'labelCheat',
+    'Indicador': 'labelIndicator', 'Indicator': 'labelIndicator',
+  };
+
+  q('.card').forEach(function(card){
+    var badge = card.querySelector('.badge');
+    var connsEl = card.querySelector('.conns');
+    if (connsEl) {
+      var num = connsEl.textContent.match(/\d+/);
+      if (num) connsEl.textContent = num[0] + ' ' + t.conns;
+    }
+    if (badge) {
+      if (badge.classList.contains('critical')) {
+        badge.innerHTML = badge.getAttribute('data-badge-type') === 'known-cheat' ? t.badgeKnownCheat : t.badgeCritical;
+      }
+      else if (badge.classList.contains('tld-flag')) badge.innerHTML = t.badgeDomainSuspect;
+      else if (badge.classList.contains('high')) badge.textContent = t.badgeSuspect;
+      else if (badge.classList.contains('medium')) badge.textContent = t.badgePossible;
+    }
+    card.querySelectorAll('.label').forEach(function(lbl){
+      var sub = lbl.querySelector('.sub');
+      if (sub) {
+        var fn = lbl.childNodes[0];
+        if (fn && fn.nodeType === 3) fn.textContent = t.labelSuspectIPs + ' ';
+        var nums = sub.textContent.match(/\d+/g);
+        if (nums && nums.length >= 2) sub.textContent = nums[0] + ' ' + t.of + ' ' + nums[1] + ' ' + t.domains;
+        return;
+      }
+      var txt = lbl.textContent.trim();
+      var key = labelMap[txt];
+      if (key && t[key]) lbl.textContent = t[key];
+    });
+    card.querySelectorAll('.none').forEach(function(el){ el.textContent = t.noneDetected; });
+    card.querySelectorAll('.val').forEach(function(el){
+      if (el.textContent.indexOf('Online') !== -1 || el.textContent.indexOf('Offline') !== -1 || el.textContent.indexOf('línea') !== -1 || el.textContent.indexOf('conexión') !== -1) {
+        el.innerHTML = el.innerHTML
+          .replace(/●\s*(En línea|Online)/g, t.online)
+          .replace(/●\s*(Sin conexión[^<]*|Offline[^<]*)/g, t.offline);
+      }
+    });
+  });
+}
+window.setLang = setLang;
+
+(function() {
+  function bindLangButtons() {
+    var langs = ['pt', 'en', 'es'];
+    langs.forEach(function(l) {
+      var btn = document.getElementById('btn-' + l);
+      if (btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          setLang(l);
+        });
+      }
+    });
+  }
+
+  function tryBind(attempts) {
+    var btn = document.getElementById('btn-pt');
+    if (btn) {
+      bindLangButtons();
+    } else if (attempts > 0) {
+      setTimeout(function() { tryBind(attempts - 1); }, 100);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { tryBind(10); });
+  } else {
+    tryBind(10);
+  }
+})();
+<\/script>`;
+}
+
+async function showResult(html) {
+  let wv = new WebView()
+  await wv.loadHTML(html, "http://localhost")
+  let langScript = `var TRANSLATIONS = {
+  pt: {
+    eyebrow: "Scanner iOS",
+    credits: "por Fantasma · Juniormodz · Teca",
+    fileLabel: "Arquivo:",
+    start: "Início",
+    lastRecord: "Último registro",
+    uniqueDomains: "Domínios únicos",
+    totalConns: "Total conexões",
+    monitoredFor: "Monitorado há",
+    criticalLabel: "Crítico",
+    suspectLabel: "Suspeito",
+    possibleLabel: "Possível",
+    appProxyTitle: "Apps Proxy / Cheat Detectados",
+    appProxySub: "Aplicativos conhecidos de interceptação de tráfego",
+    suspectIPsTitle: "IPs Suspeitos",
+    suspectIPsSub: "VPS / Hosting / Proxy confirmados",
+    possibleIPsTitle: "IPs Possíveis",
+    possibleIPsSub: "Infraestrutura cloud / datacenter",
+    labelIP: "IP",
+    labelCountry: "País",
+    labelProvider: "Provedor",
+    labelOrg: "Org",
+    labelRDNS: "rDNS",
+    labelHTTP: "HTTP",
+    labelReason: "Motivo",
+    labelUsedBy: "Usado por",
+    labelApp: "App",
+    labelSuspectIPs: "IPs suspeitos",
+    noneDetected: "Nenhum IP suspeito detectado",
+    noVPS: "✓ Nenhum IP VPS / Hosting / Proxy detectado.",
+    staleLabel: "Arquivo possivelmente antigo",
+    staleHint: "Suspeita: arquivo gerado fora do período da partida para esconder atividade.",
+    ffLabel: "Sessões no período",
+    ffLastOpen: "Última abertura",
+    ffFirstOpen: "Primeira abertura",
+    ffSessions: "inicializações registradas no período",
+    ffHint: "Se a última abertura foi após a partida → aplique o W.O!",
+    appStoreLabel: "App Store aberta",
+    appStoreHint: "Se foi após a partida → aplique o W.O!",
+    uptimeLess20: "MENOS DE 20MIN — Relatório pode não cobrir a partida inteira!",
     badgeCritical: "⚠ CRÍTICO — APP PROXY/CHEAT",
     badgeSuspect: "SUSPEITO",
     badgePossible: "POSSÍVEL",
@@ -1737,15 +2270,15 @@ var TRANSLATIONS = {
     reasonVPS: function(isp){ return "VPS/HOSTING — ISP: " + isp; },
     reasonProxy: "PROXY / VPN detectado",
     reasonCF: function(asn){ return "Cloudflare acessado via IP direto — padrão de proxy cheat (" + asn + ")"; },
-    reasonASN: function(asn,desc){ return "ASN de proxy cheat conhecido: " + asn + " — " + desc; },
+    reasonASN: function(asn,desc){ return "ASN de cheat proxy conhecido: " + asn + " — " + desc; },
     reasonRDNS: function(rdns){ return "rDNS de servidor: " + rdns; },
-    reasonHostinger: function(rdns){ return "Hostinger VPS (padrão proxy cheat BR conhecido): " + rdns; },
-    reasonNoRDNS: "Sem rDNS (PTR) — típico de VPS usado como proxy",
-    reasonOrg: function(kw){ return "Org/ISP associado a hosting/proxy cheat: " + kw; },
+    reasonHostinger: function(rdns){ return "Hostinger VPS (padrao cheat proxy BR): " + rdns; },
+    reasonNoRDNS: "Sem rDNS (PTR) — tipico de VPS usado como proxy",
+    reasonOrg: function(kw){ return "Org/ISP associado a hospedagem/cheat proxy: " + kw; },
   },
   en: {
     eyebrow: "iOS Scanner",
-    credits: "by Fantasma · Samir · Katiau",
+    credits: "by Fantasma · Juniormodz · Teca",
     fileLabel: "File:",
     start: "Start",
     lastRecord: "Last record",
@@ -1821,13 +2354,13 @@ var TRANSLATIONS = {
     reasonOrg: function(kw){ return "Org/ISP associated with hosting/cheat proxy: " + kw; },
   },
   es: {
-    eyebrow: "Escáner iOS",
-    credits: "por Fantasma · Samir · Katiau",
+    eyebrow: "Scanner iOS",
+    credits: "por Fantasma · Juniormodz · Teca",
     fileLabel: "Archivo:",
     start: "Inicio",
     lastRecord: "Último registro",
     uniqueDomains: "Dominios únicos",
-    totalConns: "Total de conexiones",
+    totalConns: "Total conexiones",
     monitoredFor: "Monitoreado hace",
     criticalLabel: "Crítico",
     suspectLabel: "Sospechoso",
@@ -1859,7 +2392,7 @@ var TRANSLATIONS = {
     ffHint: "Si la última apertura fue después del partido → ¡aplica el W.O!",
     appStoreLabel: "App Store abierta",
     appStoreHint: "Si fue después del partido → ¡aplica el W.O!",
-    uptimeLess20: "MENOS DE 20MIN — ¡El reporte puede no cubrir la partida entera!",
+    uptimeLess20: "MENOS DE 20MIN — ¡El informe puede no cubrir toda la partida!",
     badgeCritical: "⚠ CRÍTICO — APP PROXY/CHEAT",
     badgeSuspect: "SOSPECHOSO",
     badgePossible: "POSIBLE",
@@ -1872,8 +2405,8 @@ var TRANSLATIONS = {
     domains: "dominios",
     labelCheat: "Cheat",
     labelIndicator: "Indicador",
-    indicatorDomain: "Dominio detectado en el reporte de red",
-    indicatorIP: "IP detectada en el reporte de red",
+    indicatorDomain: "Dominio detectado en el informe de red",
+    indicatorIP: "IP detectada en el informe de red",
     iosVersionLabel: "Versión iOS",
     rootsCardLabel: "⚠ Certificados raíz",
     rootsLabel: "Certificado Raíz Sospechoso",
@@ -1883,8 +2416,8 @@ var TRANSLATIONS = {
     ipsTitle: "Apps Sospechosas Instaladas",
     ipsSub: "Detectadas en el historial de uso del dispositivo",
     ipsHint: "⚠ Apps encontradas en los datos de análisis del iPhone — indican presencia de herramientas de cheat/jailbreak/proxy",
-    ipsLaunched: "▶ Abierto",
-    ipsInstalled: "⬇ Instalado",
+    ipsLaunched: "▶ Abierta",
+    ipsInstalled: "⬇ Instalada",
     badgeKnownCheat: "⚠ CRÍTICO — CHEAT CONFIRMADO",
     reasonTLD: function(tld){ return "TLD sospechoso detectado: \\"" + tld + "\\" — patrón común en cheats/proxies"; },
     reasonWord: function(word){ return "Palabra sospechosa en el dominio: \\"" + word + "\\""; },
@@ -1919,32 +2452,38 @@ function setLang(lang) {
     if (hgLabels[i]) hgLabels[i].textContent = t[k];
   });
 
+  // data-i18n generic handler
   q('[data-i18n]').forEach(function(el){
     var key = el.getAttribute('data-i18n');
     if (t[key] && typeof t[key] === 'string') el.textContent = t[key];
   });
 
+  // indicator value (domain vs IP)
   q('[data-i18n-indicator]').forEach(function(el){
     var kind = el.getAttribute('data-i18n-indicator');
     el.textContent = kind === 'domain' ? t.indicatorDomain : t.indicatorIP;
   });
 
+  // roots-detail with count
   q('[data-roots-count]').forEach(function(el){
     var n = parseInt(el.getAttribute('data-roots-count'), 10);
     var label = n > 1 ? t.rootsDetailN : t.rootsDetail1;
     el.textContent = n + ' ' + label + ' (roots_installed: ' + n + ')';
   });
 
+  // domain-badge inline SUSPEITO/POSSÍVEL
   q('[data-sev]').forEach(function(el){
     var sev = el.getAttribute('data-sev');
     if (sev === 'HIGH') el.textContent = t.badgeSuspect;
     else if (sev === 'MEDIUM') el.textContent = t.badgePossible;
   });
 
+  // reasons translation via data-reasons
   q('[data-reasons]').forEach(function(el){
     try {
       var reasons = JSON.parse(el.getAttribute('data-reasons'));
       var translated = reasons.map(function(r) {
+        // match each reason pattern and translate
         var m;
         if ((m = r.match(/TLD suspeito detectado: "([^"]+)"/)) || (m = r.match(/Suspicious TLD detected: "([^"]+)"/)) || (m = r.match(/TLD sospechoso detectado: "([^"]+)"/))) return t.reasonTLD(m[1]);
         if ((m = r.match(/Palavra suspeita no domínio: "([^"]+)"/)) || (m = r.match(/Suspicious word in domain: "([^"]+)"/)) || (m = r.match(/Palabra sospechosa en el dominio: "([^"]+)"/))) return t.reasonWord(m[1]);
@@ -1956,7 +2495,7 @@ function setLang(lang) {
         if ((m = r.match(/rDNS de servidor: (.+)/) || r.match(/Server rDNS: (.+)/))) return t.reasonRDNS(m[1]);
         if (r.match(/Sem rDNS|No rDNS|Sin rDNS/)) return t.reasonNoRDNS;
         if ((m = r.match(/Org\\/ISP[^:]+: (.+)/) || r.match(/Org\\/ISP[^:]+: (.+)/))) return t.reasonOrg(m[1]);
-        return r;
+        return r; // fallback: keep original
       });
       el.innerHTML = translated.join('<br>');
     } catch(e) {}
@@ -2079,7 +2618,7 @@ function setLang(lang) {
       if (el.textContent.indexOf('Online') !== -1 || el.textContent.indexOf('Offline') !== -1 || el.textContent.indexOf('línea') !== -1 || el.textContent.indexOf('conexión') !== -1) {
         el.innerHTML = el.innerHTML
           .replace(/●\\s*(En línea|Online)/g, t.online)
-          .replace(/●\\s*(Sin conexão[^<]*|Offline[^<]*)/g, t.offline);
+          .replace(/●\\s*(Sin conexión[^<]*|Offline[^<]*)/g, t.offline);
       }
     });
   });
@@ -2114,15 +2653,8 @@ window.setLang = setLang;
   } else {
     tryBind(10);
   }
-})();
-<\/script>`
-}
-
-async function showResult(html) {
-  let wv = new WebView()
-  await wv.loadHTML(html)
-  let langScriptText = getLangScriptText()
-  await wv.evaluateJavaScript(langScriptText)
+})();`
+  await wv.evaluateJavaScript(langScript)
   Speech.speak(S.done)
   await wait(1200)
   await wv.present(false)
@@ -2145,23 +2677,23 @@ async function readFile(path) {
 
 async function main() {
   let step1 = new Alert()
-  step1.title = "📋 Paso 1 de 3 — Reporte de Privacidad"
-  step1.message = "Ve a:\n\nAjustes → Privacidad y Seguridad → Reporte de Privacidad de las Apps\n\nDesliza hasta el final y toca en\n\"Activar Reporte de Privacidad de las Apps\"\n\nLuego toca en\n\"Exportar Reporte de Privacidad de las Apps\"\ny guarda el archivo .ndjson en cualquier lugar (Archivos, iCloud, etc)."
-  step1.addAction("Entendido, siguiente →")
+  step1.title = "📋 Passo 1 de 3 — Relatório de Privacidade"
+  step1.message = "Vá em:\n\nAjustes → Privacidade e Segurança → Relatório de Privacidade de Apps\n\nRole até o final e toque em\n\"Ativar Relatório de Privacidade de Apps\"\n\nDepois toque em\n\"Exportar Relatório de Privacidade de Apps\"\ne salve o arquivo .ndjson em qualquer lugar (Arquivos, iCloud, etc)."
+  step1.addAction("Entendido, próximo →")
   step1.addCancelAction("Cancelar")
   if (await step1.present() === -1) { Script.complete(); return }
 
   let step2 = new Alert()
-  step2.title = "📊 Paso 2 de 3 — Datos de Análisis"
-  step2.message = "Ve a:\n\nAjustes → Privacidad y Seguridad → Análisis y Mejoras\n\nActiva las opciones:\n• Compartir análisis del iPhone\n• Compartir análisis de iCloud\n• Compartir con desarrolladores de app\n\nLuego regresa y toca en\n\"Datos de Análisis\"\nDesliza hasta el final y selecciona el archivo más reciente que comience con\n\"xp_amp_app_usage_dnu\"\n\nToca el archivo → toca el ícono de compartir → Guardar en Archivos."
-  step2.addAction("Entendido, siguiente →")
+  step2.title = "📊 Passo 2 de 3 — Dados de Análise"
+  step2.message = "Vá em:\n\nAjustes → Privacidade e Segurança → Análise e Melhorias\n\nAtive as opções:\n• Compartilhar análise do iPhone\n• Compartilhar análise do iCloud\n• Compartilhar com desenvolvedores de app\n\nDepois volte e toque em\n\"Dados de Análise\"\nRole até o final e selecione o arquivo mais recente começando com\n\"xp_amp_app_usage_dnu\"\n\nToque no arquivo → toque no ícone de compartilhar → Salvar em Arquivos."
+  step2.addAction("Entendido, próximo →")
   step2.addCancelAction("Cancelar")
   if (await step2.present() === -1) { Script.complete(); return }
 
   let step3 = new Alert()
-  step3.title = "✅ Paso 3 de 3 — Seleccionar archivos"
-  step3.message = "Ahora selecciona los 2 archivos guardados.\n\nPuedes seleccionarlos en cualquier orden — el sistema identifica automáticamente cada uno.\n\n📋 App_Privacy_Report.ndjson\n📊 xp_amp_app_usage_dnu*.ips"
-  step3.addAction("Seleccionar archivo 1")
+  step3.title = "✅ Passo 3 de 3 — Selecionar arquivos"
+  step3.message = "Agora selecione os 2 arquivos salvos.\n\nVocê pode selecioná-los em qualquer ordem — o sistema identifica automaticamente cada um.\n\n📋 App_Privacy_Report.ndjson\n📊 xp_amp_app_usage_dnu*.ips"
+  step3.addAction("Selecionar arquivo 1")
   step3.addCancelAction("Cancelar")
   if (await step3.present() === -1) { Script.complete(); return }
 
@@ -2169,14 +2701,14 @@ async function main() {
   if (!path1) { Script.complete(); return }
   let content1 = await readFile(path1)
   if (!content1) {
-    let a = new Alert(); a.title = "Error"; a.message = "No fue posible leer el archivo 1."; a.addAction("OK"); await a.present(); return
+    let a = new Alert(); a.title = "Erro"; a.message = "Não foi possível ler o arquivo 1."; a.addAction("OK"); await a.present(); return
   }
 
   let notice2 = new Alert()
-  notice2.title = "Archivo 2"
-  notice2.message = "Selecciona el segundo archivo (o salta para analizar solo el primero)."
-  notice2.addAction("Seleccionar archivo 2")
-  notice2.addCancelAction("Omitir")
+  notice2.title = "Arquivo 2"
+  notice2.message = "Selecione o segundo arquivo (ou pule para analisar somente o primeiro)."
+  notice2.addAction("Selecionar arquivo 2")
+  notice2.addCancelAction("Pular")
   let path2 = null
   let content2 = null
   if (await notice2.present() !== -1) {
@@ -2201,10 +2733,10 @@ async function main() {
 
   if (type2 && type1 === type2) {
     let a = new Alert()
-    a.title = "Archivos del mismo tipo"
+    a.title = "Arquivos do mesmo tipo"
     a.message = type1 === "ndjson"
-      ? "Los 2 archivos parecen ser App Privacy Reports. Selecciona un xp_amp_app_usage_dnu*.ips como segundo archivo."
-      : "Los 2 archivos parecen ser datos de análisis. Selecciona un App_Privacy_Report.ndjson como primer archivo."
+      ? "Os 2 arquivos parecem ser App Privacy Reports. Selecione um xp_amp_app_usage_dnu*.ips como segundo arquivo."
+      : "Os 2 arquivos parecem ser dados de análise. Selecione um App_Privacy_Report.ndjson como primeiro arquivo."
     a.addAction("OK")
     await a.present()
     return
@@ -2218,8 +2750,8 @@ async function main() {
     ndjsonContent = content2; ndjsonPath = path2
   } else {
     let a = new Alert()
-    a.title = "Archivo no reconocido"
-    a.message = "No fue posible identificar el tipo de los archivos.\n\nVerifica si seleccionaste:\n• App_Privacy_Report.ndjson\n• xp_amp_app_usage_dnu*.ips"
+    a.title = "Arquivo não reconhecido"
+    a.message = "Não foi possível identificar o tipo dos arquivos.\n\nVerifique se selecionou:\n• App_Privacy_Report.ndjson\n• xp_amp_app_usage_dnu*.ips"
     a.addAction("OK")
     await a.present()
     return
@@ -2228,7 +2760,7 @@ async function main() {
   if (!ndjsonContent) {
     let a = new Alert()
     a.title = "App Privacy Report ausente"
-    a.message = "El archivo App_Privacy_Report.ndjson es obligatorio.\n\nAjustes → Privacidad → Reporte de Privacidad de las Apps → Exportar"
+    a.message = "O arquivo App_Privacy_Report.ndjson é obrigatório.\n\nAjustes → Privacidade → Relatório de Privacidade de Apps → Exportar"
     a.addAction("OK")
     await a.present()
     return
@@ -2239,7 +2771,7 @@ async function main() {
   if (!validation.ok) {
     let a = new Alert()
     a.title = "App Privacy Report inválido"
-    a.message = validation.reason + "\n\nExporta en: Ajustes → Privacidad → Reporte de Privacidad de las Apps → Exportar"
+    a.message = validation.reason + "\n\nExporte em: Ajustes → Privacidade → Relatório de Privacidade de Apps → Exportar"
     a.addAction("OK")
     await a.present()
     return
@@ -2257,7 +2789,7 @@ async function main() {
     }
   }
 
-  let filename = (ndjsonPath || "archivo").split("/").pop()
+  let filename = (ndjsonPath || "arquivo").split("/").pop()
 
   Speech.speak(S.start)
 
