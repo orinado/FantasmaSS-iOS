@@ -1739,7 +1739,7 @@ function buildLangScript() {
 var TRANSLATIONS = {
   pt: {
     eyebrow: "Scanner iOS",
-    credits: "por Fantasma · Samir · Katiau",
+    credits: "por Fantasma @orinado · Juniormodz · Teca",
     fileLabel: "Arquivo:",
     start: "Início",
     lastRecord: "Último registro",
