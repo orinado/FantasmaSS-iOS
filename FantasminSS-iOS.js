@@ -1,79 +1,41 @@
-const DEVICE_LANG = (Device.language() || "pt").toLowerCase().substring(0, 2)
+const DEVICE_LANG = (Device.language() || "es").toLowerCase().substring(0, 2)
 const SPEECH = {
   pt: {
-    start:    "Analisando, aguarde o Fantasma terminar",
+    start:    "Analisando, aguarde o FantasminSS terminar",
     half:     "Scanner em cinquenta por cento. Aguarde mais um pouco.",
     probe:    "Scanner em noventa por cento. Aguarde mais um pouco.",
-    done:     "FantasmaSS finalizado. Analise os resultados com cuidado.",
+    done:     "FantasminSS finalizado. Analise os resultados com cuidado.",
   },
   en: {
-    start:    "Analyzing, please wait for FantasmaSS to finish.",
+    start:    "Analyzing, please wait for FantasminSS to finish.",
     half:     "Scanner at fifty percent. Please wait a little longer.",
     probe:    "Scanner at ninety percent. Almost done.",
-    done:     "FantasmaSS finished. Analyze the results carefully.",
+    done:     "FantasminSS finished. Analyze the results carefully.",
   },
   es: {
-    start:    "Analizando, espera que FantasmaSS termine.",
+    start:    "Analizando, espera que FantasminSS termine.",
     half:     "Escáner al cincuenta por ciento. Espera un poco más.",
     probe:    "Escáner al noventa por ciento. Ya casi termina.",
-    done:     "FantasmaSS finalizado. Analiza los resultados con cuidado.",
+    done:     "FantasminSS finalizado. Analiza los resultados con cuidado.",
   },
 }
 const S = SPEECH[DEVICE_LANG] || SPEECH["pt"]
 
 const VPS_HOSTING_KEYWORDS = [
-  "hostinger", "hstgr",
-  "locaweb",
-  "kinghost",
-  "umbler",
-  "hostgator",
-  "uol host", "uolhost",
-  "bol", "bol.com.br",
-  "redehost",
-  "weblink",
-  "brasileirohost", "br.host",
-  "dialhost",
-  "serverspace",
-  "melhorhospedagem",
-  "ibrcom",
-  "masterweb",
-  "superdomínios", "superdomin",
-  "plankton", "vps.br",
-  "digitalocean",
-  "linode", "akamai",
-  "vultr",
-  "hetzner",
-  "ovh", "ovhcloud",
-  "contabo",
-  "ionos",
-  "godaddy",
-  "siteground",
-  "cloudways",
-  "amazon", "aws", "amazonaws",
-  "google cloud", "googlecloud",
-  "microsoft azure", "azure",
-  "alibaba cloud", "alibabacloud",
-  "tencent cloud", "tencentcloud",
-  "hstgr.cloud",
-  "srv.umbler",
-  "kinghost.net",
-  "locaweb.com.br",
-  "choopa", "psychz", "m247",
-  "serverius", "frantech", "buyvm",
-  "sharktech", "quadranet", "nexeon",
-  "servermania", "hostwinds", "racknerd",
-  "dedipath", "spartanhost", "cloudie",
-  "tsohost", "wavenet", "fasthosts",
-  "multacom",
-  "telus",
-  "fdcservers", "fdc servers",
-  "leaseweb",
-  "colocation america",
-  "b2 net", "b2net",
-  "path.net",
-  "datacamp",
-  "tzulo",
-  "coresite",
+  "hostinger", "hstgr", "locaweb", "kinghost", "umbler", "hostgator",
+  "uol host", "uolhost", "bol", "bol.com.br", "redehost", "weblink",
+  "brasileirohost", "br.host", "dialhost", "serverspace", "melhorhospedagem",
+  "ibrcom", "masterweb", "superdomínios", "superdomin", "plankton", "vps.br",
+  "digitalocean", "linode", "akamai", "vultr", "hetzner", "ovh", "ovhcloud",
+  "contabo", "ionos", "godaddy", "siteground", "cloudways", "amazon", "aws",
+  "amazonaws", "google cloud", "googlecloud", "microsoft azure", "azure",
+  "alibaba cloud", "alibabacloud", "tencent cloud", "tencentcloud",
+  "hstgr.cloud", "srv.umbler", "kinghost.net", "locaweb.com.br", "choopa",
+  "psychz", "m247", "serverius", "frantech", "buyvm", "sharktech",
+  "quadranet", "nexeon", "servermania", "hostwinds", "racknerd", "dedipath",
+  "spartanhost", "cloudie", "tsohost", "wavenet", "fasthosts", "multacom",
+  "telus", "fdcservers", "fdc servers", "leaseweb", "colocation america",
+  "b2 net", "b2net", "path.net", "datacamp", "tzulo", "coresite",
 ]
 
 const CHEAT_PROXY_ASN = {
@@ -94,23 +56,10 @@ const CHEAT_PROXY_ASN = {
 }
 
 const RDNS_HOSTING_PATTERNS = [
-  "hstgr.cloud",
-  "staticip",
-  "srv.",
-  "vps.",
-  "cloud.",
-  "host.",
-  "server.",
-  "dedicated.",
-  ".kinghost.net",
-  ".locaweb.com.br",
-  ".umbler.net",
-  ".hostgator.com.br",
-  ".digitalocean.com",
-  ".vultr.com",
-  ".linode.com",
-  ".hetzner.com",
-  ".contabo.net",
+  "hstgr.cloud", "staticip", "srv.", "vps.", "cloud.", "host.",
+  "server.", "dedicated.", ".kinghost.net", ".locaweb.com.br",
+  ".umbler.net", ".hostgator.com.br", ".digitalocean.com",
+  ".vultr.com", ".linode.com", ".hetzner.com", ".contabo.net",
 ]
 
 const CHEAT_APPS = {
@@ -669,7 +618,6 @@ async function analyze(entries) {
   }
   cheatAppFindings = [...ffFakeFindings, ...cheatAppFindings]
 
-  // Coleta quais domínios FF foram chamados pelos apps legítimos do FF
   let ffLegitDomainsSeen = new Set()
   for (let e of netEntries) {
     let d = (e.domain || "").toLowerCase()
@@ -688,8 +636,6 @@ async function analyze(entries) {
     if (FF_LEGIT_CALLERS.has(bid)) continue
     if (IGNORED_BUNDLES.has(bid)) continue
     if (!FF_PROXY_LOGIN_DOMAINS.has(d)) continue
-    // Só dispara se o domínio NÃO foi chamado pelos apps legítimos do FF na mesma sessão
-    // Isso evita falsos positivos de janela de tempo (iOS agrupando apps diferentes)
     if (ffLegitDomainsSeen.has(d)) continue
     if (!proxyLoginSeen[d]) proxyLoginSeen[d] = { domain: e.domain, bundles: new Set(), hits: 0 }
     proxyLoginSeen[d].bundles.add(bid)
@@ -703,12 +649,9 @@ async function analyze(entries) {
   for (let e of netEntries) {
     let d = (e.domain || "").toLowerCase()
     let bid = e.bundleID || ""
-    // Se o bundle é o app legítimo do FF e o domínio é um domínio oficial de proxy/login do FF,
-    // não dispara como cheat — é tráfego normal do próprio jogo.
     if (FF_LEGIT_CALLERS.has(bid) && FF_PROXY_LOGIN_DOMAINS.has(d)) continue
     for (let [indicator, desc] of Object.entries(KNOWN_CHEAT_INFRA)) {
       if (d === indicator.toLowerCase() || d.endsWith("." + indicator.toLowerCase())) {
-        // Domínios que fazem parte do FF_PROXY_LOGIN_DOMAINS só são cheat se chamados por bundle não-legítimo
         if (FF_PROXY_LOGIN_DOMAINS.has(indicator.toLowerCase()) && FF_LEGIT_CALLERS.has(bid)) continue
         let existing = knownCheatFindings.find(k => k.indicator === indicator)
         if (existing) {
@@ -855,7 +798,6 @@ async function analyze(entries) {
     let bid = e.bundleID || ""
     let dom = (e.domain || "").toLowerCase()
     if (!bid) continue
-    // Não flagra o app legítimo do FF acessando seus próprios domínios de proxy/login
     if (FF_LEGIT_CALLERS.has(bid) && FF_PROXY_LOGIN_DOMAINS.has(dom)) continue
     let isKnown = GHOST_SUSPECT_DOMAINS.has(dom)
     let isTld   = SUSPICIOUS_TLDS.some(t => dom.endsWith(t))
@@ -1007,16 +949,16 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   for (let p of proxyLoginFindings) {
     let bundleList = p.bundles.map(b => `<span class="bundle" style="color:#ff4400">${b}</span>`).join(" ")
     criticalCards += `
-    <div class="card critical" style="border-left-color:#ff4400;background:#140800;border-color:#3a1500;">
+    <div class="card critical" style="border-left-color:#ff4400;background:#1a1a1a;border-color:#2a2a2a;">
       <div class="card-header">
-        <span class="badge critical" style="background:#1a0800;color:#ff4400;border-color:#ff440055;">&#128274; PROXY BYPASS LOGIN — CRÍTICO</span>
+        <span class="badge critical" style="background:#2a2a2a;color:#ff4400;border-color:#ff440055;">&#128274; PROXY BYPASS LOGIN — CRÍTICO</span>
         <span class="conns">${p.hits} conexões</span>
       </div>
       <div class="card-domain">${p.domain}</div>
       <div class="grid">
         <div class="row"><span class="label">Detecção</span><span class="val reason" style="color:#ff6600;font-weight:bold">Domínio exclusivo do Free Fire chamado por app não autorizado — padrão de proxy interceptando login</span></div>
         <div class="row"><span class="label">App interceptor</span><span class="val">${bundleList}</span></div>
-        <div class="row"><span class="label">Esperado de</span><span class="val"><span class="bundle" style="color:#44ff88">com.dts.freefireth</span> <span class="bundle" style="color:#44ff88">com.dts.freefiremax</span></span></div>
+        <div class="row"><span class="label">Esperado de</span><span class="val"><span class="bundle" style="color:#4caf50">com.dts.freefireth</span> <span class="bundle" style="color:#4caf50">com.dts.freefiremax</span></span></div>
       </div>
     </div>`
   }
@@ -1033,17 +975,16 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     criticalCards += `
     <div class="card critical">
       <div class="card-header">
-        <span class="badge critical" style="${f.isProxyApp ? 'background:#1a0035;color:#ff00cc;border-color:#ff00cc55;' : ''}">${label}</span>
+        <span class="badge critical" style="${f.isProxyApp ? 'background:#2a2a2a;color:#ff0033;border-color:#ff003355;' : ''}">${label}</span>
         <span class="conns">${f.hits} conexões</span>
       </div>
       <div class="card-domain">${f.bundleID}</div>
       <div class="grid">
-        <div class="row"><span class="label">Situação</span><span class="val reason" style="color:#ff44cc;font-weight:bold">${desc}</span></div>
+        <div class="row"><span class="label">Situação</span><span class="val reason" style="color:#ff3366;font-weight:bold">${desc}</span></div>
         <div class="row"><span class="label">Domínios<br><span class="sub">${f.domains.length} únicos</span></span><span class="val">${domainRows}${extraDomains}</span></div>
       </div>
     </div>`
   }
-
 
   let ghostSection = ""
   if (ghostAppFindings && ghostAppFindings.length > 0) {
@@ -1089,7 +1030,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
       </div>
       <div class="card-domain">${k.indicator}</div>
       <div class="grid">
-        <div class="row"><span class="label" data-i18n="labelCheat">Cheat</span><span class="val reason" style="color:#ff4444;font-weight:bold">${k.desc}</span></div>
+        <div class="row"><span class="label" data-i18n="labelCheat">Cheat</span><span class="val reason" style="color:#ff3333;font-weight:bold">${k.desc}</span></div>
         <div class="row"><span class="label" data-i18n="labelIndicator">Indicador</span><span class="val" data-i18n-indicator="${indicatorKind}">${indicatorText} detectado no relatório de rede</span></div>
         ${bundleList ? `<div class="row"><span class="label">Usado por</span><span class="val">${bundleList}</span></div>` : ""}
       </div>
@@ -1158,10 +1099,10 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     }
   }
 
-  let uptimeBg    = uptimeWarning ? "background:linear-gradient(90deg,#2a1000,#1a0800)" : "background:#0d1b2a"
-  let uptimeDotCl = uptimeWarning ? "background:#ff8800;box-shadow:0 0 6px #ff8800" : "background:#4caf50;box-shadow:0 0 6px #4caf50"
+  let uptimeBg    = uptimeWarning ? "background:linear-gradient(90deg,#1a1a1a,#0a0a0a)" : "background:#0d0d0d"
+  let uptimeDotCl = uptimeWarning ? "background:#ff3333;box-shadow:0 0 6px #ff3333" : "background:#4caf50;box-shadow:0 0 6px #4caf50"
   let uptimeWarnBadge = uptimeWarning
-    ? `<span style="margin-left:8px;background:#3a1800;color:#ff8800;border:1px solid #ff8800;font-size:9px;padding:2px 7px;border-radius:10px;font-weight:bold" data-i18n="uptimeLess20">&#9888; MENOS DE 20MIN — Relatório pode não cobrir a partida inteira!</span>`
+    ? `<span style="margin-left:8px;background:#2a2a2a;color:#ff3333;border:1px solid #ff3333;font-size:9px;padding:2px 7px;border-radius:10px;font-weight:bold" data-i18n="uptimeLess20">&#9888; MENOS DE 20MIN — Relatório pode não cobrir a partida inteira!</span>`
     : ""
 
   let rootsWarn = ""
@@ -1224,7 +1165,7 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     if (type.includes("Twitter") || type.includes("X")) return "#1da1f2"
     if (type.includes("Gmail"))     return "#ea4335"
     if (type.includes("VK"))        return "#4a76a8"
-    return "#556"
+    return "#555"
   }
 
   let ffSessionRows = ffSessions.map((s, i) => {
@@ -1268,12 +1209,12 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
 <meta charset="utf-8">
 <style>
   * { box-sizing:border-box; margin:0; padding:0; }
-  body { background:#0a0a0f; color:#e0e0e0; font-family:-apple-system,ui-monospace,monospace; font-size:13px; }
+  body { background:#000000; color:#e0e0e0; font-family:-apple-system,ui-monospace,monospace; font-size:13px; }
 
   /* HERO */
   .hero {
-    background: linear-gradient(160deg, #0d1b2a 0%, #0a0a12 70%);
-    border-bottom: 1px solid #1a2a3a;
+    background: linear-gradient(160deg, #111111 0%, #050505 70%);
+    border-bottom: 1px solid #222222;
     padding: 28px 16px 20px;
     position: relative; overflow: hidden;
     text-align: center;
@@ -1281,11 +1222,11 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   .hero::after {
     content:""; position:absolute; top:-60px; left:50%; transform:translateX(-50%);
     width:220px; height:220px;
-    background:radial-gradient(circle, #00e5ff0d 0%, transparent 70%);
+    background:radial-gradient(circle, #4caf5015 0%, transparent 70%);
     border-radius:50%; pointer-events:none;
   }
   .hero-eyebrow {
-    font-size:9px; letter-spacing:3px; color:#00e5ff55;
+    font-size:9px; letter-spacing:3px; color:#4caf50;
     text-transform:uppercase; margin-bottom:8px;
   }
   .hero-name {
@@ -1293,32 +1234,32 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     letter-spacing:-0.5px; margin-bottom:5px;
   }
   .hero-credits {
-    font-size:11px; color:#3a5a72; letter-spacing:2.5px;
+    font-size:11px; color:#888888; letter-spacing:2.5px;
     margin-bottom:18px; font-weight:500;
   }
   .hero-credits .credit-name {
-    color:#557a94;
+    color:#aaaaaa;
     transition: color 0.2s;
   }
-  .hero-name span { color:#00e5ff; }
+  .hero-name span { color:#4caf50; }
   .hero-file {
-    font-size:10px; color:#556; word-break:break-all;
-    padding:7px 10px; background:#0d1520;
-    border-radius:7px; border-left:3px solid #00e5ff33;
+    font-size:10px; color:#888888; word-break:break-all;
+    padding:7px 10px; background:#111111;
+    border-radius:7px; border-left:3px solid #4caf5055;
     margin-bottom:14px; line-height:1.5;
     text-align:left;
   }
-  .hero-file strong { color:#00e5ff99; }
+  .hero-file strong { color:#4caf50; }
   .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
   .hg-card {
-    background:#0d1520; border-radius:8px;
-    padding:9px 12px; border:1px solid #1a2a3a;
+    background:#111111; border-radius:8px;
+    padding:9px 12px; border:1px solid #222222;
   }
-  .hg-label { font-size:9px; color:#446; letter-spacing:1px; text-transform:uppercase; margin-bottom:3px; }
-  .hg-val        { font-size:12px; color:#ccd; }
-  .hg-val.cyan   { color:#00e5ff; font-weight:bold; font-size:14px; }
-  .hg-val.warn   { color:#ff8800; font-weight:bold; font-size:13px; }
-  .hg-card-warn  { background:#1a0a00 !important; border-color:#ff880055 !important; }
+  .hg-label { font-size:9px; color:#777777; letter-spacing:1px; text-transform:uppercase; margin-bottom:3px; }
+  .hg-val        { font-size:12px; color:#cccccc; }
+  .hg-val.cyan   { color:#4caf50; font-weight:bold; font-size:14px; }
+  .hg-val.warn   { color:#ff3333; font-weight:bold; font-size:13px; }
+  .hg-card-warn  { background:#1a0505 !important; border-color:#ff333355 !important; }
   .hg-card-full  { grid-column: 1 / -1; }
 
   /* LANGUAGE SELECTOR */
@@ -1326,17 +1267,17 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     display:flex; justify-content:center; gap:6px; margin-bottom:14px;
   }
   .lang-btn {
-    background:#0d1520; border:1px solid #1a2a3a; border-radius:20px;
-    color:#556; font-size:10px; letter-spacing:1px; padding:4px 10px;
+    background:#111111; border:1px solid #222222; border-radius:20px;
+    color:#777777; font-size:10px; letter-spacing:1px; padding:4px 10px;
     cursor:pointer; font-family:inherit; transition:all 0.2s;
     text-transform:uppercase; font-weight:600;
   }
-  .lang-btn:hover { border-color:#00e5ff55; color:#00e5ffaa; }
-  .lang-btn.active { background:#001a22; border-color:#00e5ff; color:#00e5ff; }
+  .lang-btn:hover { border-color:#4caf50; color:#4caf50; }
+  .lang-btn.active { background:#0a1a0a; border-color:#4caf50; color:#4caf50; }
 
   /* UPTIME BAR */
   .uptime-bar {
-    border-bottom:1px solid #1a2a3a;
+    border-bottom:1px solid #222222;
     padding:10px 16px;
     display:flex; align-items:center; gap:8px; flex-wrap:wrap;
   }
@@ -1345,8 +1286,8 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     animation:pulse 2s infinite;
   }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-  .uptime-text { font-size:11px; color:#889; }
-  .uptime-text strong { color:#fff; }
+  .uptime-text { font-size:11px; color:#aaaaaa; }
+  .uptime-text strong { color:#ffffff; }
 
   /* CONTENT */
   .content { padding:16px; }
@@ -1354,23 +1295,23 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   /* APP STORE BANNER */
   .appstore-banner {
     display:flex; align-items:center; gap:14px;
-    background:linear-gradient(135deg,#1c1800,#241f00);
-    border:1px solid #6a5a00; border-radius:12px;
+    background:linear-gradient(135deg,#111111,#0a0a0a);
+    border:1px solid #333333; border-radius:12px;
     padding:14px 16px; margin-bottom:18px;
   }
   .appstore-left { font-size:32px; flex-shrink:0; }
-  .appstore-label { font-size:9px; color:#aa9900; letter-spacing:2px; text-transform:uppercase; font-weight:bold; }
-  .appstore-time  { font-size:18px; font-weight:bold; color:#ffe500; margin:3px 0; }
-  .appstore-hint  { font-size:10px; color:#8a7700; }
+  .appstore-label { font-size:9px; color:#888888; letter-spacing:2px; text-transform:uppercase; font-weight:bold; }
+  .appstore-time  { font-size:18px; font-weight:bold; color:#cccccc; margin:3px 0; }
+  .appstore-hint  { font-size:10px; color:#777777; }
 
   /* SUMMARY */
   .summary { display:flex; gap:8px; margin-bottom:20px; }
   .stat {
-    flex:1; background:#0d1520; border-radius:10px;
-    padding:12px 6px; text-align:center; border:1px solid #1a2a3a;
+    flex:1; background:#111111; border-radius:10px;
+    padding:12px 6px; text-align:center; border:1px solid #222222;
   }
   .stat .num { font-size:28px; font-weight:bold; line-height:1; }
-  .stat .lbl { font-size:9px; color:#446; margin-top:4px; letter-spacing:1px; text-transform:uppercase; }
+  .stat .lbl { font-size:9px; color:#777777; margin-top:4px; letter-spacing:1px; text-transform:uppercase; }
 
   /* SECTION HEADERS */
   .section-header {
@@ -1386,33 +1327,33 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   .section-header .sh-title {
     font-size:12px; font-weight:bold; letter-spacing:0.5px; text-transform:uppercase;
   }
-  .section-header .sh-sub { font-size:10px; color:#446; margin-top:1px; }
+  .section-header .sh-sub { font-size:10px; color:#777777; margin-top:1px; }
   .section-header .sh-count {
     font-size:11px; font-weight:bold;
     padding:3px 10px; border-radius:20px;
   }
-  .sh-critical .sh-icon { background:#2a0035; }
-  .sh-critical .sh-title { color:#ff00cc; }
-  .sh-critical .sh-count { background:#2a0035; color:#ff00cc; border:1px solid #ff00cc44; }
-  .sh-high .sh-icon { background:#2a0808; }
-  .sh-high .sh-title { color:#ff5555; }
-  .sh-high .sh-count { background:#2a0808; color:#ff5555; border:1px solid #ff444444; }
-  .sh-medium .sh-icon { background:#2a2000; }
-  .sh-medium .sh-title { color:#ffbb00; }
-  .sh-medium .sh-count { background:#2a2000; color:#ffbb00; border:1px solid #ffbb0044; }
-  .divider { height:1px; background:#1a2a3a; margin:20px 0; }
+  .sh-critical .sh-icon { background:#1a0505; }
+  .sh-critical .sh-title { color:#ff3333; }
+  .sh-critical .sh-count { background:#1a0505; color:#ff3333; border:1px solid #ff333355; }
+  .sh-high .sh-icon { background:#1a1a05; }
+  .sh-high .sh-title { color:#ffaa00; }
+  .sh-high .sh-count { background:#1a1a05; color:#ffaa00; border:1px solid #ffaa0055; }
+  .sh-medium .sh-icon { background:#0a1a0a; }
+  .sh-medium .sh-title { color:#4caf50; }
+  .sh-medium .sh-count { background:#0a1a0a; color:#4caf50; border:1px solid #4caf5055; }
+  .divider { height:1px; background:#222222; margin:20px 0; }
 
   /* CARDS */
   .card {
-    background:#0d1520; border-radius:12px;
+    background:#111111; border-radius:12px;
     margin-bottom:12px; overflow:hidden;
-    border:1px solid #1a2a3a; border-left:4px solid #333;
+    border:1px solid #222222; border-left:4px solid #444;
   }
-  .card.critical { border-left-color:#ff00cc; background:#110016; border-color:#2a0035; }
-  .card.tld-flag { border-left-color:#ff6600; background:#120a00; border-color:#3a1a00; }
-  .badge.tld-flag{ background:#2a1000; color:#ff6600; border:1px solid #ff660055; }
-  .card.high     { border-left-color:#ff4444; border-color:#2a0808; }
-  .card.medium   { border-left-color:#ffbb00; border-color:#2a2000; }
+  .card.critical { border-left-color:#ff3333; background:#0a0505; border-color:#331a1a; }
+  .card.tld-flag { border-left-color:#ff6600; background:#0a0500; border-color:#331a00; }
+  .badge.tld-flag{ background:#1a0500; color:#ff6600; border:1px solid #ff660055; }
+  .card.high     { border-left-color:#ffaa00; border-color:#332200; }
+  .card.medium   { border-left-color:#4caf50; border-color:#0a330a; }
   .card-header {
     display:flex; justify-content:space-between; align-items:center;
     padding:10px 14px 6px;
@@ -1421,63 +1362,63 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
     font-size:9px; font-weight:bold;
     padding:3px 9px; border-radius:20px; letter-spacing:0.5px;
   }
-  .badge.critical { background:#2a0035; color:#ff00cc; border:1px solid #ff00cc55; }
-  .badge.high     { background:#2a0808; color:#ff5555; border:1px solid #ff444455; }
-  .badge.medium   { background:#2a2000; color:#ffbb00; border:1px solid #ffbb0055; }
-  .conns { font-size:10px; color:#446; }
+  .badge.critical { background:#1a0505; color:#ff3333; border:1px solid #ff333355; }
+  .badge.high     { background:#1a1a05; color:#ffaa00; border:1px solid #ffaa0055; }
+  .badge.medium   { background:#0a1a0a; color:#4caf50; border:1px solid #4caf5055; }
+  .conns { font-size:10px; color:#777777; }
   .card-domain {
-    font-size:13px; font-weight:bold; color:#fff;
+    font-size:13px; font-weight:bold; color:#ffffff;
     padding:0 14px 10px; word-break:break-all;
   }
   .grid { padding:0 14px 12px; }
   .row {
     display:flex; gap:8px; padding:5px 0;
-    border-top:1px solid #1a2a3a; align-items:flex-start;
+    border-top:1px solid #222222; align-items:flex-start;
   }
-  .label { color:#446; min-width:65px; font-size:10px; padding-top:1px; flex-shrink:0; line-height:1.4; }
-  .sub   { color:#334; font-size:9px; }
-  .val   { color:#bbc; word-break:break-all; flex:1; font-size:11px; line-height:1.5; }
-  .isp    { color:#ffbb00; }
-  .reason { color:#ff8a80; }
-  .rdns        { color:#ce93d8; font-style:italic; }
+  .label { color:#777777; min-width:65px; font-size:10px; padding-top:1px; flex-shrink:0; line-height:1.4; }
+  .sub   { color:#555555; font-size:9px; }
+  .val   { color:#cccccc; word-break:break-all; flex:1; font-size:11px; line-height:1.5; }
+  .isp    { color:#4caf50; }
+  .reason { color:#ff6666; }
+  .rdns        { color:#aa66cc; font-style:italic; }
 
   .ghost-banner {
-    background:linear-gradient(135deg,#0a0a1a,#080814);
-    border:1px solid #3344aa55; border-radius:12px;
+    background:linear-gradient(135deg,#0a0a0a,#050505);
+    border:1px solid #333333; border-radius:12px;
     padding:14px; margin-bottom:12px;
   }
   .ghost-header { display:flex; align-items:flex-start; gap:10px; margin-bottom:12px; }
   .ghost-icon   { font-size:20px; flex-shrink:0; }
   .ghost-title-block { flex:1; }
-  .ghost-title  { font-size:12px; font-weight:bold; color:#8899ff; letter-spacing:0.5px; }
-  .ghost-sub    { font-size:10px; color:#334466; margin-top:2px; }
-  .ghost-count  { background:#0a0a2a; color:#6677ee; font-size:11px; font-weight:bold; padding:2px 8px; border-radius:10px; border:1px solid #3344aa55; align-self:flex-start; }
+  .ghost-title  { font-size:12px; font-weight:bold; color:#aaaaaa; letter-spacing:0.5px; }
+  .ghost-sub    { font-size:10px; color:#777777; margin-top:2px; }
+  .ghost-count  { background:#111111; color:#cccccc; font-size:11px; font-weight:bold; padding:2px 8px; border-radius:10px; border:1px solid #333333; align-self:flex-start; }
   .ghost-rows   { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
-  .ghost-row    { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; background:#0a0a20; border:1px solid #222244; border-radius:8px; padding:10px; }
+  .ghost-row    { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; background:#111111; border:1px solid #222222; border-radius:8px; padding:10px; }
   .ghost-row-left  { flex:1; min-width:0; display:flex; flex-direction:column; gap:4px; }
   .ghost-row-right { display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0; }
-  .ghost-bundle { font-size:11px; font-weight:bold; color:#aabbff; word-break:break-all; }
+  .ghost-bundle { font-size:11px; font-weight:bold; color:#cccccc; word-break:break-all; }
   .ghost-domains { display:flex; flex-wrap:wrap; gap:4px; }
-  .ghost-domain { font-size:9px; background:#0d0d30; color:#6677cc; border:1px solid #223; padding:1px 6px; border-radius:8px; }
-  .ghost-more   { font-size:9px; color:#445; }
-  .ghost-hits   { font-size:11px; font-weight:bold; color:#6677ee; }
-  .ghost-label  { font-size:9px; color:#334; background:#0a0a1a; padding:2px 6px; border-radius:6px; border:1px solid #223; }
-  .ghost-hint   { font-size:9px; color:#334466; border-top:1px solid #1a1a33; padding-top:8px; }
+  .ghost-domain { font-size:9px; background:#1a1a1a; color:#aaaaaa; border:1px solid #333; padding:1px 6px; border-radius:8px; }
+  .ghost-more   { font-size:9px; color:#777; }
+  .ghost-hits   { font-size:11px; font-weight:bold; color:#aaaaaa; }
+  .ghost-label  { font-size:9px; color:#777; background:#1a1a1a; padding:2px 6px; border-radius:6px; border:1px solid #333; }
+  .ghost-hint   { font-size:9px; color:#777777; border-top:1px solid #222222; padding-top:8px; }
 
   .roots-banner {
     display:flex; align-items:flex-start; gap:12px;
-    background:linear-gradient(135deg,#1a0a00,#120800);
-    border:1px solid #ff880066; border-radius:12px;
+    background:linear-gradient(135deg,#1a0505,#0a0505);
+    border:1px solid #ff333355; border-radius:12px;
     padding:14px; margin-bottom:12px;
   }
   .roots-icon   { font-size:22px; flex-shrink:0; }
-  .roots-label  { font-size:12px; font-weight:bold; color:#ff8800; letter-spacing:0.5px; margin-bottom:3px; }
-  .roots-detail { font-size:13px; color:#ffaa44; font-weight:bold; margin-bottom:4px; }
-  .roots-hint   { font-size:10px; color:#885500; line-height:1.4; }
+  .roots-label  { font-size:12px; font-weight:bold; color:#ff3333; letter-spacing:0.5px; margin-bottom:3px; }
+  .roots-detail { font-size:13px; color:#ff6666; font-weight:bold; margin-bottom:4px; }
+  .roots-hint   { font-size:10px; color:#aa5555; line-height:1.4; }
 
   .ips-banner {
-    background:linear-gradient(135deg,#1a0a1a,#120010);
-    border:1px solid #440044; border-radius:12px;
+    background:linear-gradient(135deg,#111111,#0a0a0a);
+    border:1px solid #333333; border-radius:12px;
     padding:14px; margin-bottom:12px;
   }
   .ips-header {
@@ -1485,130 +1426,130 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   }
   .ips-icon { font-size:22px; flex-shrink:0; }
   .ips-header-text { flex:1; }
-  .ips-title { font-size:12px; font-weight:bold; color:#dd44ff; letter-spacing:0.5px; }
-  .ips-sub   { font-size:10px; color:#664466; margin-top:1px; }
+  .ips-title { font-size:12px; font-weight:bold; color:#aaaaaa; letter-spacing:0.5px; }
+  .ips-sub   { font-size:10px; color:#777777; margin-top:1px; }
   .ips-count {
-    background:#2a0035; color:#dd44ff; border:1px solid #dd44ff55;
+    background:#1a1a1a; color:#cccccc; border:1px solid #333333;
     font-size:14px; font-weight:bold; padding:4px 10px; border-radius:20px;
   }
   .ips-rows  { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
   .ips-row { }
-  .ips-row-critical { background:#1a0010 !important; border-color:#ff004455 !important; }
-  .ips-row-vpn      { background:#0a0a1a !important; border-color:#4455ff44 !important; }
-  .ips-row-developer{ background:#0a1a0a !important; border-color:#44aa4444 !important; }
-  .ips-row-warning  { background:#1a0a00 !important; border-color:#ff880033 !important; }
+  .ips-row-critical { background:#1a0505 !important; border-color:#ff333355 !important; }
+  .ips-row-vpn      { background:#111111 !important; border-color:#444444 !important; }
+  .ips-row-developer{ background:#0a1a0a !important; border-color:#4caf5055 !important; }
+  .ips-row-warning  { background:#1a1a05 !important; border-color:#ffaa0055 !important; }
   .ips-row-top { margin-bottom:4px; }
   .ips-cat-badge {
     display:inline-block; font-size:9px; font-weight:bold;
     padding:2px 8px; border-radius:10px; letter-spacing:0.5px;
   }
-  .ips-cat-critical  { background:#2a0015; color:#ff3388; border:1px solid #ff338855; }
-  .ips-cat-vpn       { background:#0a0a2a; color:#6699ff; border:1px solid #6699ff55; }
-  .ips-cat-developer { background:#0a2a0a; color:#44cc44; border:1px solid #44cc4455; }
-  .ips-cat-warning   { background:#2a1000; color:#ff8800; border:1px solid #ff880055; }
+  .ips-cat-critical  { background:#2a0505; color:#ff6666; border:1px solid #ff666655; }
+  .ips-cat-vpn       { background:#222222; color:#aaaaaa; border:1px solid #aaaaaa55; }
+  .ips-cat-developer { background:#0a2a0a; color:#4caf50; border:1px solid #4caf5055; }
+  .ips-cat-warning   { background:#2a2a05; color:#ffcc00; border:1px solid #ffcc0055; }
   .ips-row {
     display:flex; justify-content:space-between; align-items:flex-start; gap:8px;
-    background:#1a001a; border:1px solid #330033; border-radius:8px; padding:8px 10px;
+    background:#111111; border:1px solid #222222; border-radius:8px; padding:8px 10px;
   }
   .ips-row-left  { display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; }
   .ips-row-right { display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0; }
-  .ips-bundle { font-size:11px; font-weight:bold; color:#cc88ff; word-break:break-all; }
-  .ips-reason { font-size:10px; color:#886688; line-height:1.4; }
-  .ips-version { font-size:9px; color:#554455; }
+  .ips-bundle { font-size:11px; font-weight:bold; color:#cccccc; word-break:break-all; }
+  .ips-reason { font-size:10px; color:#888888; line-height:1.4; }
+  .ips-version { font-size:9px; color:#555555; }
   .ips-badge {
     font-size:9px; font-weight:bold; padding:2px 7px; border-radius:10px;
   }
-  .ips-badge.launched  { background:#1a0035; color:#aa44ff; border:1px solid #aa44ff55; }
-  .ips-badge.installed { background:#002200; color:#44aa44; border:1px solid #44aa4455; }
-  .ips-hint { font-size:9px; color:#553355; line-height:1.4; }
+  .ips-badge.launched  { background:#1a1a1a; color:#aaaaaa; border:1px solid #444444; }
+  .ips-badge.installed { background:#0a1a0a; color:#4caf50; border:1px solid #4caf5055; }
+  .ips-hint { font-size:9px; color:#555555; line-height:1.4; }
 
   .stale-banner {
     display:flex; align-items:flex-start; gap:12px;
-    background:linear-gradient(135deg,#1a1200,#221800);
-    border:1px solid #8a6000; border-radius:12px;
+    background:linear-gradient(135deg,#111111,#0a0a0a);
+    border:1px solid #333333; border-radius:12px;
     padding:12px 16px; margin-bottom:14px;
   }
   .stale-left  { font-size:26px; flex-shrink:0; margin-top:2px; }
-  .stale-label { font-size:9px; color:#aa7700; letter-spacing:2px; text-transform:uppercase; font-weight:bold; }
-  .stale-time  { font-size:14px; color:#ffaa00; margin:3px 0; }
-  .stale-time strong { color:#ffd000; }
-  .stale-hint  { font-size:10px; color:#7a5500; line-height:1.4; }
+  .stale-label { font-size:9px; color:#888888; letter-spacing:2px; text-transform:uppercase; font-weight:bold; }
+  .stale-time  { font-size:14px; color:#cccccc; margin:3px 0; }
+  .stale-time strong { color:#ffffff; }
+  .stale-hint  { font-size:10px; color:#777777; line-height:1.4; }
   .ff-banner {
     display:flex; align-items:flex-start; gap:14px;
-    background:linear-gradient(135deg,#0a1a00,#0f2200);
-    border:1px solid #2a5500; border-radius:12px;
+    background:linear-gradient(135deg,#111111,#0a0a0a);
+    border:1px solid #333333; border-radius:12px;
     padding:14px 16px; margin-bottom:14px;
   }
   .ff-left  { font-size:30px; flex-shrink:0; margin-top:2px; }
   .ff-info  { flex:1; }
-  .ff-label { font-size:9px; color:#5a9900; letter-spacing:2px; text-transform:uppercase; font-weight:bold; margin-bottom:6px; }
+  .ff-label { font-size:9px; color:#888888; letter-spacing:2px; text-transform:uppercase; font-weight:bold; margin-bottom:6px; }
   .ff-row   { display:flex; align-items:baseline; gap:8px; margin-bottom:2px; }
-  .ff-tag   { font-size:9px; color:#446; min-width:100px; text-transform:uppercase; letter-spacing:0.5px; }
-  .ff-time  { font-size:16px; font-weight:bold; color:#88ff00; }
-  .ff-time-sub { font-size:13px; color:#5a9900; }
-  .ff-sessions { font-size:10px; color:#3a6600; margin-top:6px; }
+  .ff-tag   { font-size:9px; color:#777777; min-width:100px; text-transform:uppercase; letter-spacing:0.5px; }
+  .ff-time  { font-size:16px; font-weight:bold; color:#cccccc; }
+  .ff-time-sub { font-size:13px; color:#888888; }
+  .ff-sessions { font-size:10px; color:#777777; margin-top:6px; }
   .ff-session-row {
     display:flex; align-items:center; justify-content:space-between;
-    gap:8px; padding:5px 0; border-top:1px solid #1a2a10;
+    gap:8px; padding:5px 0; border-top:1px solid #222222;
   }
   .ff-session-row:first-of-type { border-top:none; }
   .ff-session-left { display:flex; flex-direction:column; gap:1px; }
-  .ff-session-num  { font-size:9px; color:#446; text-transform:uppercase; letter-spacing:0.5px; }
-  .ff-session-ts   { font-size:13px; font-weight:bold; color:#88ff00; }
+  .ff-session-num  { font-size:9px; color:#777777; text-transform:uppercase; letter-spacing:0.5px; }
+  .ff-session-ts   { font-size:13px; font-weight:bold; color:#cccccc; }
   .ff-login-badge  {
     font-size:9px; font-weight:bold; padding:3px 8px;
     border-radius:10px; white-space:nowrap; flex-shrink:0;
   }
-  .ff-hint  { font-size:10px; color:#4a7700; margin-top:3px; }
+  .ff-hint  { font-size:10px; color:#777777; margin-top:3px; }
 
   /* PRE-LOGIN BANNER */
   .prelim-banner {
-    background:linear-gradient(135deg,#1a0000,#240808);
-    border:1px solid #8a0000; border-radius:12px;
+    background:linear-gradient(135deg,#1a0505,#0a0505);
+    border:1px solid #ff333355; border-radius:12px;
     padding:14px 16px; margin-bottom:14px;
   }
   .prelim-header {
     display:flex; align-items:center; gap:10px; margin-bottom:12px;
   }
   .prelim-icon  { font-size:22px; flex-shrink:0; }
-  .prelim-title { font-size:12px; font-weight:bold; color:#ff4444; letter-spacing:0.3px; }
-  .prelim-sub   { font-size:10px; color:#884444; margin-top:2px; }
+  .prelim-title { font-size:12px; font-weight:bold; color:#ff3333; letter-spacing:0.3px; }
+  .prelim-sub   { font-size:10px; color:#aa5555; margin-top:2px; }
   .prelim-count {
-    margin-left:auto; background:#3a0000; color:#ff4444;
-    border:1px solid #ff444444; font-size:14px; font-weight:bold;
+    margin-left:auto; background:#2a0505; color:#ff6666;
+    border:1px solid #ff666655; font-size:14px; font-weight:bold;
     padding:4px 12px; border-radius:20px; flex-shrink:0;
   }
   .prelim-rows  { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
   .pre-row {
-    background:#0d0505; border-radius:8px;
-    padding:8px 10px; border-left:3px solid #8a0000;
+    background:#111111; border-radius:8px;
+    padding:8px 10px; border-left:3px solid #ff3333;
   }
   .pre-row-top    { display:flex; align-items:center; gap:6px; margin-bottom:3px; flex-wrap:wrap; }
-  .pre-domain     { font-size:12px; color:#ddc; word-break:break-all; flex:1; }
-  .pre-hits       { font-size:10px; color:#664444; flex-shrink:0; }
-  .pre-row-detail { font-size:10px; color:#664444; line-height:1.4; }
+  .pre-domain     { font-size:12px; color:#cccccc; word-break:break-all; flex:1; }
+  .pre-hits       { font-size:10px; color:#aa5555; flex-shrink:0; }
+  .pre-row-detail { font-size:10px; color:#aa5555; line-height:1.4; }
   .prelim-hint {
-    font-size:10px; color:#884444; padding-top:10px;
-    border-top:1px solid #2a0808; line-height:1.5;
+    font-size:10px; color:#aa5555; padding-top:10px;
+    border-top:1px solid #331a1a; line-height:1.5;
   }
   .http-on     { color:#4caf50; font-weight:bold; }
-  .http-off    { color:#555; font-weight:bold; }
-  .http-banner { color:#ff00cc; font-weight:bold; text-transform:uppercase; font-size:10px; }
-  .none   { color:#334; }
+  .http-off    { color:#555555; font-weight:bold; }
+  .http-banner { color:#ff3333; font-weight:bold; text-transform:uppercase; font-size:10px; }
+  .none   { color:#555555; }
   .bundle {
-    display:inline-block; background:#0d1520; border-radius:5px;
-    padding:2px 6px; font-size:9px; color:#556; margin:1px;
-    word-break:break-all; border:1px solid #1a2a3a;
+    display:inline-block; background:#111111; border-radius:5px;
+    padding:2px 6px; font-size:9px; color:#888888; margin:1px;
+    word-break:break-all; border:1px solid #222222;
   }
-  .domain-row { padding:3px 0; font-size:11px; color:#bbc; word-break:break-all; }
+  .domain-row { padding:3px 0; font-size:11px; color:#cccccc; word-break:break-all; }
   .domain-badge {
     display:inline-block; font-size:9px; font-weight:bold;
     padding:1px 5px; border-radius:4px; margin-right:4px; vertical-align:middle;
   }
-  .domain-badge.high   { background:#2a0808; color:#ff5555; }
-  .domain-badge.medium { background:#2a2000; color:#ffbb00; }
+  .domain-badge.high   { background:#1a1a05; color:#ffaa00; }
+  .domain-badge.medium { background:#0a1a0a; color:#4caf50; }
   .ok {
-    background:#0a1a10; border:1px solid #1a3020; color:#4caf50;
+    background:#0a1a0a; border:1px solid #1a331a; color:#4caf50;
     padding:20px; border-radius:12px; text-align:center; font-size:14px;
   }
 </style>
@@ -1617,8 +1558,8 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
 
 <div class="hero">
   <div class="hero-eyebrow">Scanner iOS</div>
-  <div class="hero-name">Fantasma<span>SS</span></div>
-  <div class="hero-credits">por <span class="credit-name">Fantasma</span> &middot; <span class="credit-name">Samir</span> &middot; <span class="credit-name">Katiau</span></div>
+  <div class="hero-name">Fantasmin<span>SS</span></div>
+  <div class="hero-credits">por <span class="credit-name">Fantasmin</span> &middot; <span class="credit-name">Samir</span> &middot; <span class="credit-name">Katiau</span></div>
   <div class="lang-bar">
     <button class="lang-btn active" id="btn-pt">PT-BR</button>
     <button class="lang-btn" id="btn-en">EN</button>
@@ -1667,15 +1608,15 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
 
   <div class="summary">
     <div class="stat">
-      <div class="num" style="color:#ff00cc">${criticalCount}</div>
+      <div class="num" style="color:#ff3333">${criticalCount}</div>
       <div class="lbl">Crítico</div>
     </div>
     <div class="stat">
-      <div class="num" style="color:#ff5555">${highCount}</div>
+      <div class="num" style="color:#ffaa00">${highCount}</div>
       <div class="lbl">Suspeito</div>
     </div>
     <div class="stat">
-      <div class="num" style="color:#ffbb00">${medCount}</div>
+      <div class="num" style="color:#4caf50">${medCount}</div>
       <div class="lbl">Possível</div>
     </div>
   </div>
@@ -1734,474 +1675,12 @@ function buildHTML(findings, netEntries, cheatAppFindings, knownCheatFindings, i
   return rawHtml
 }
 
-function buildLangScript() {
+function getLangScriptText() {
   return `<script>
 var TRANSLATIONS = {
   pt: {
     eyebrow: "Scanner iOS",
-    credits: "por Fantasma @orinado · Juniormodz · Teca",
-    fileLabel: "Arquivo:",
-    start: "Início",
-    lastRecord: "Último registro",
-    uniqueDomains: "Domínios únicos",
-    totalConns: "Total conexões",
-    monitoredFor: "Monitorado há",
-    criticalLabel: "Crítico",
-    suspectLabel: "Suspeito",
-    possibleLabel: "Possível",
-    appProxyTitle: "Apps Proxy / Cheat Detectados",
-    appProxySub: "Aplicativos conhecidos de interceptação de tráfego",
-    suspectIPsTitle: "IPs Suspeitos",
-    suspectIPsSub: "VPS / Hosting / Proxy confirmados",
-    possibleIPsTitle: "IPs Possíveis",
-    possibleIPsSub: "Infraestrutura cloud / datacenter",
-    labelIP: "IP",
-    labelCountry: "País",
-    labelProvider: "Provedor",
-    labelOrg: "Org",
-    labelRDNS: "rDNS",
-    labelHTTP: "HTTP",
-    labelReason: "Motivo",
-    labelUsedBy: "Usado por",
-    labelApp: "App",
-    labelSuspectIPs: "IPs suspeitos",
-    noneDetected: "Nenhum IP suspeito detectado",
-    noVPS: "✓ Nenhum IP VPS / Hosting / Proxy detectado.",
-    staleLabel: "Arquivo possivelmente antigo",
-    staleHint: "Suspeita: arquivo gerado fora do período da partida para esconder atividade.",
-    ffLabel: "Sessões no período",
-    ffLastOpen: "Última abertura",
-    ffFirstOpen: "Primeira abertura",
-    ffSessions: "inicializações registradas no período",
-    ffHint: "Se a última abertura foi após a partida → aplique o W.O!",
-    appStoreLabel: "App Store aberta",
-    appStoreHint: "Se foi após a partida → aplique o W.O!",
-    uptimeLess20: "MENOS DE 20MIN — Relatório pode não cobrir a partida inteira!",
-    badgeCritical: "⚠ CRÍTICO — APP PROXY/CHEAT",
-    badgeSuspect: "SUSPEITO",
-    badgePossible: "POSSÍVEL",
-    badgeDomainSuspect: "⚠ DOMÍNIO SUSPEITO",
-    of: "de",
-    online: "● Online",
-    offline: "● Offline / Sem resposta",
-    lastRecord2: "Último registro:",
-    conns: "conexões",
-    domains: "domínios",
-    labelCheat: "Cheat",
-    labelIndicator: "Indicador",
-    indicatorDomain: "Domínio detectado no relatório de rede",
-    indicatorIP: "IP detectado no relatório de rede",
-    iosVersionLabel: "Versão iOS",
-    rootsCardLabel: "⚠ Certificados raiz",
-    rootsLabel: "Certificado Raiz Suspeito",
-    rootsDetail1: "certificado raiz instalado",
-    rootsDetailN: "certificados raiz instalados",
-    rootsHint: "Certificados raiz permitem interceptar tráfego HTTPS — padrão de proxy cheat tipo mitmproxy",
-    ipsTitle: "Apps Suspeitos Instalados",
-    ipsSub: "Detectados no histórico de uso do dispositivo",
-    ipsHint: "⚠ Apps encontrados nos dados de análise do iPhone — indicam presença de ferramentas de cheat/jailbreak/proxy",
-    ipsLaunched: "▶ Aberto",
-    ipsInstalled: "⬇ Instalado",
-    badgeKnownCheat: "⚠ CRÍTICO — CHEAT CONFIRMADO",
-    reasonTLD: function(tld){ return "TLD suspeito detectado: \"" + tld + "\" — padrão comum em cheats/proxies"; },
-    reasonWord: function(word){ return "Palavra suspeita no domínio: \"" + word + "\""; },
-    reasonVPS: function(isp){ return "VPS/HOSTING — ISP: " + isp; },
-    reasonProxy: "PROXY / VPN detectado",
-    reasonCF: function(asn){ return "Cloudflare acessado via IP direto — padrão de proxy cheat (" + asn + ")"; },
-    reasonASN: function(asn,desc){ return "ASN de cheat proxy conhecido: " + asn + " — " + desc; },
-    reasonRDNS: function(rdns){ return "rDNS de servidor: " + rdns; },
-    reasonHostinger: function(rdns){ return "Hostinger VPS (padrao cheat proxy BR): " + rdns; },
-    reasonNoRDNS: "Sem rDNS (PTR) — tipico de VPS usado como proxy",
-    reasonOrg: function(kw){ return "Org/ISP associado a hospedagem/cheat proxy: " + kw; },
-  },
-  en: {
-    eyebrow: "iOS Scanner",
-    credits: "by Fantasma · Juniormodz · Teca",
-    fileLabel: "File:",
-    start: "Start",
-    lastRecord: "Last record",
-    uniqueDomains: "Unique domains",
-    totalConns: "Total connections",
-    monitoredFor: "Monitored for",
-    criticalLabel: "Critical",
-    suspectLabel: "Suspicious",
-    possibleLabel: "Possible",
-    appProxyTitle: "Proxy / Cheat Apps Detected",
-    appProxySub: "Known traffic interception applications",
-    suspectIPsTitle: "Suspicious IPs",
-    suspectIPsSub: "VPS / Hosting / Confirmed Proxy",
-    possibleIPsTitle: "Possible IPs",
-    possibleIPsSub: "Cloud / datacenter infrastructure",
-    labelIP: "IP",
-    labelCountry: "Country",
-    labelProvider: "Provider",
-    labelOrg: "Org",
-    labelRDNS: "rDNS",
-    labelHTTP: "HTTP",
-    labelReason: "Reason",
-    labelUsedBy: "Used by",
-    labelApp: "App",
-    labelSuspectIPs: "Suspicious IPs",
-    noneDetected: "No suspicious IPs detected",
-    noVPS: "✓ No VPS / Hosting / Proxy IPs detected.",
-    staleLabel: "File possibly outdated",
-    staleHint: "Suspicion: file generated outside the match period to hide activity.",
-    ffLabel: "Sessions in period",
-    ffLastOpen: "Last opened",
-    ffFirstOpen: "First opened",
-    ffSessions: "startups recorded in the period",
-    ffHint: "If last opened after the match → apply W.O!",
-    appStoreLabel: "App Store opened",
-    appStoreHint: "If it was after the match → apply W.O!",
-    uptimeLess20: "LESS THAN 20MIN — Report may not cover the entire match!",
-    badgeCritical: "⚠ CRITICAL — PROXY/CHEAT APP",
-    badgeSuspect: "SUSPICIOUS",
-    badgePossible: "POSSIBLE",
-    badgeDomainSuspect: "⚠ SUSPICIOUS DOMAIN",
-    of: "of",
-    online: "● Online",
-    offline: "● Offline / No response",
-    lastRecord2: "Last record:",
-    conns: "connections",
-    domains: "domains",
-    labelCheat: "Cheat",
-    labelIndicator: "Indicator",
-    indicatorDomain: "Domain detected in network report",
-    indicatorIP: "IP detected in network report",
-    iosVersionLabel: "iOS Version",
-    rootsCardLabel: "⚠ Root certificates",
-    rootsLabel: "Suspicious Root Certificate",
-    rootsDetail1: "root certificate installed",
-    rootsDetailN: "root certificates installed",
-    rootsHint: "Root certificates allow HTTPS traffic interception — common pattern in mitmproxy-type cheat tools",
-    ipsTitle: "Suspicious Apps Installed",
-    ipsSub: "Detected in device usage history",
-    ipsHint: "⚠ Apps found in iPhone analytics data — indicate presence of cheat/jailbreak/proxy tools",
-    ipsLaunched: "▶ Opened",
-    ipsInstalled: "⬇ Installed",
-    badgeKnownCheat: "⚠ CRITICAL — CONFIRMED CHEAT",
-    reasonTLD: function(tld){ return "Suspicious TLD detected: \"" + tld + "\" — common pattern in cheats/proxies"; },
-    reasonWord: function(word){ return "Suspicious word in domain: \"" + word + "\""; },
-    reasonVPS: function(isp){ return "VPS/HOSTING — ISP: " + isp; },
-    reasonProxy: "PROXY / VPN detected",
-    reasonCF: function(asn){ return "Cloudflare accessed via direct IP — cheat proxy pattern (" + asn + ")"; },
-    reasonASN: function(asn,desc){ return "Known cheat proxy ASN: " + asn + " — " + desc; },
-    reasonRDNS: function(rdns){ return "Server rDNS: " + rdns; },
-    reasonHostinger: function(rdns){ return "Hostinger VPS (known BR cheat proxy pattern): " + rdns; },
-    reasonNoRDNS: "No rDNS (PTR) — typical of VPS used as proxy",
-    reasonOrg: function(kw){ return "Org/ISP associated with hosting/cheat proxy: " + kw; },
-  },
-  es: {
-    eyebrow: "Scanner iOS",
-    credits: "por Fantasma · Juniormodz · Tecas",
-    fileLabel: "Archivo:",
-    start: "Inicio",
-    lastRecord: "Último registro",
-    uniqueDomains: "Dominios únicos",
-    totalConns: "Total conexiones",
-    monitoredFor: "Monitoreado hace",
-    criticalLabel: "Crítico",
-    suspectLabel: "Sospechoso",
-    possibleLabel: "Posible",
-    appProxyTitle: "Apps Proxy / Cheat Detectadas",
-    appProxySub: "Aplicaciones conocidas de interceptación de tráfico",
-    suspectIPsTitle: "IPs Sospechosas",
-    suspectIPsSub: "VPS / Hosting / Proxy confirmados",
-    possibleIPsTitle: "IPs Posibles",
-    possibleIPsSub: "Infraestructura cloud / datacenter",
-    labelIP: "IP",
-    labelCountry: "País",
-    labelProvider: "Proveedor",
-    labelOrg: "Org",
-    labelRDNS: "rDNS",
-    labelHTTP: "HTTP",
-    labelReason: "Motivo",
-    labelUsedBy: "Usado por",
-    labelApp: "App",
-    labelSuspectIPs: "IPs sospechosas",
-    noneDetected: "Ninguna IP sospechosa detectada",
-    noVPS: "✓ Ninguna IP VPS / Hosting / Proxy detectada.",
-    staleLabel: "Archivo posiblemente antiguo",
-    staleHint: "Sospecha: archivo generado fuera del período del partido para ocultar actividad.",
-    ffLabel: "Sesiones en el período",
-    ffLastOpen: "Última apertura",
-    ffFirstOpen: "Primera apertura",
-    ffSessions: "inicializaciones registradas en el período",
-    ffHint: "Si la última apertura fue después del partido → ¡aplica el W.O!",
-    appStoreLabel: "App Store abierta",
-    appStoreHint: "Si fue después del partido → ¡aplica el W.O!",
-    uptimeLess20: "MENOS DE 20MIN — ¡El informe puede no cubrir toda la partida!",
-    badgeCritical: "⚠ CRÍTICO — APP PROXY/CHEAT",
-    badgeSuspect: "SOSPECHOSO",
-    badgePossible: "POSIBLE",
-    badgeDomainSuspect: "⚠ DOMINIO SOSPECHOSO",
-    of: "de",
-    online: "● En línea",
-    offline: "● Sin conexión / Sin respuesta",
-    lastRecord2: "Último registro:",
-    conns: "conexiones",
-    domains: "dominios",
-    labelCheat: "Cheat",
-    labelIndicator: "Indicador",
-    indicatorDomain: "Dominio detectado en el informe de red",
-    indicatorIP: "IP detectada en el informe de red",
-    iosVersionLabel: "Versión iOS",
-    rootsCardLabel: "⚠ Certificados raíz",
-    rootsLabel: "Certificado Raíz Sospechoso",
-    rootsDetail1: "certificado raíz instalado",
-    rootsDetailN: "certificados raíz instalados",
-    rootsHint: "Los certificados raíz permiten interceptar tráfico HTTPS — patrón común en cheats tipo mitmproxy",
-    ipsTitle: "Apps Sospechosas Instaladas",
-    ipsSub: "Detectadas en el historial de uso del dispositivo",
-    ipsHint: "⚠ Apps encontradas en los datos de análisis del iPhone — indican presencia de herramientas de cheat/jailbreak/proxy",
-    ipsLaunched: "▶ Abierta",
-    ipsInstalled: "⬇ Instalada",
-    badgeKnownCheat: "⚠ CRÍTICO — CHEAT CONFIRMADO",
-    reasonTLD: function(tld){ return "TLD sospechoso detectado: \"" + tld + "\" — patrón común en cheats/proxies"; },
-    reasonWord: function(word){ return "Palabra sospechosa en el dominio: \"" + word + "\""; },
-    reasonVPS: function(isp){ return "VPS/HOSTING — ISP: " + isp; },
-    reasonProxy: "PROXY / VPN detectado",
-    reasonCF: function(asn){ return "Cloudflare accedido vía IP directa — patrón de proxy cheat (" + asn + ")"; },
-    reasonASN: function(asn,desc){ return "ASN de proxy cheat conocido: " + asn + " — " + desc; },
-    reasonRDNS: function(rdns){ return "rDNS de servidor: " + rdns; },
-    reasonHostinger: function(rdns){ return "Hostinger VPS (patrón proxy cheat BR conocido): " + rdns; },
-    reasonNoRDNS: "Sin rDNS (PTR) — típico de VPS usado como proxy",
-    reasonOrg: function(kw){ return "Org/ISP asociado a hosting/proxy cheat: " + kw; },
-  }
-};
-
-function setLang(lang) {
-  const t = TRANSLATIONS[lang];
-  if (!t) return;
-
-  ['pt','en','es'].forEach(function(l) {
-    var btn = document.getElementById('btn-' + l);
-    if (btn) btn.classList.toggle('active', l === lang);
-  });
-
-  function q(sel) { return Array.from(document.querySelectorAll(sel)); }
-
-  q('.hero-eyebrow').forEach(function(el){ el.textContent = t.eyebrow; });
-  q('.hero-credits').forEach(function(el){ el.textContent = t.credits; });
-  q('.hero-file strong').forEach(function(el){ el.textContent = t.fileLabel; });
-
-  var hgLabels = q('.hg-label');
-  ['start','lastRecord','uniqueDomains','totalConns'].forEach(function(k,i){
-    if (hgLabels[i]) hgLabels[i].textContent = t[k];
-  });
-
-  // data-i18n generic handler
-  q('[data-i18n]').forEach(function(el){
-    var key = el.getAttribute('data-i18n');
-    if (t[key] && typeof t[key] === 'string') el.textContent = t[key];
-  });
-
-  // indicator value (domain vs IP)
-  q('[data-i18n-indicator]').forEach(function(el){
-    var kind = el.getAttribute('data-i18n-indicator');
-    el.textContent = kind === 'domain' ? t.indicatorDomain : t.indicatorIP;
-  });
-
-  // roots-detail with count
-  q('[data-roots-count]').forEach(function(el){
-    var n = parseInt(el.getAttribute('data-roots-count'), 10);
-    var label = n > 1 ? t.rootsDetailN : t.rootsDetail1;
-    el.textContent = n + ' ' + label + ' (roots_installed: ' + n + ')';
-  });
-
-  // domain-badge inline SUSPEITO/POSSÍVEL
-  q('[data-sev]').forEach(function(el){
-    var sev = el.getAttribute('data-sev');
-    if (sev === 'HIGH') el.textContent = t.badgeSuspect;
-    else if (sev === 'MEDIUM') el.textContent = t.badgePossible;
-  });
-
-  // reasons translation via data-reasons
-  q('[data-reasons]').forEach(function(el){
-    try {
-      var reasons = JSON.parse(el.getAttribute('data-reasons'));
-      var translated = reasons.map(function(r) {
-        // match each reason pattern and translate
-        var m;
-        if ((m = r.match(/TLD suspeito detectado: "([^"]+)"/)) || (m = r.match(/Suspicious TLD detected: "([^"]+)"/)) || (m = r.match(/TLD sospechoso detectado: "([^"]+)"/))) return t.reasonTLD(m[1]);
-        if ((m = r.match(/Palavra suspeita no domínio: "([^"]+)"/)) || (m = r.match(/Suspicious word in domain: "([^"]+)"/)) || (m = r.match(/Palabra sospechosa en el dominio: "([^"]+)"/))) return t.reasonWord(m[1]);
-        if ((m = r.match(/VPS\/HOSTING — ISP: (.+)/))) return t.reasonVPS(m[1]);
-        if (r.match(/PROXY \/ VPN/)) return t.reasonProxy;
-        if ((m = r.match(/Cloudflare[^(]+\((\w+)\)/))) return t.reasonCF(m[1]);
-        if ((m = r.match(/ASN[^:]+: (\w+) — (.+)/))) return t.reasonASN(m[1], m[2]);
-        if ((m = r.match(/Hostinger VPS[^:]+: (.+)/))) return t.reasonHostinger(m[1]);
-        if ((m = r.match(/rDNS de servidor: (.+)/) || r.match(/Server rDNS: (.+)/))) return t.reasonRDNS(m[1]);
-        if (r.match(/Sem rDNS|No rDNS|Sin rDNS/)) return t.reasonNoRDNS;
-        if ((m = r.match(/Org\/ISP[^:]+: (.+)/) || r.match(/Org\/ISP[^:]+: (.+)/))) return t.reasonOrg(m[1]);
-        return r; // fallback: keep original
-      });
-      el.innerHTML = translated.join('<br>');
-    } catch(e) {}
-  });
-
-  q('.uptime-text').forEach(function(el){
-    var strong = el.querySelector('strong');
-    if (strong) {
-      var val = strong.textContent;
-      while (el.firstChild) el.removeChild(el.firstChild);
-      el.appendChild(document.createTextNode(t.monitoredFor + ' '));
-      var ns = document.createElement('strong');
-      ns.textContent = val;
-      el.appendChild(ns);
-    }
-  });
-
-  q('.uptime-bar span').forEach(function(el){
-    if (el.style && el.style.marginLeft) el.innerHTML = '&#9888; ' + t.uptimeLess20;
-  });
-
-  var statLabels = q('.stat .lbl');
-  ['criticalLabel','suspectLabel','possibleLabel'].forEach(function(k,i){
-    if (statLabels[i]) statLabels[i].textContent = t[k];
-  });
-
-  q('.section-header').forEach(function(sh){
-    var title = sh.querySelector('.sh-title');
-    var sub   = sh.querySelector('.sh-sub');
-    if (!title) return;
-    if (sh.classList.contains('sh-critical')) {
-      title.textContent = t.appProxyTitle;
-      if (sub) sub.textContent = t.appProxySub;
-    } else if (sh.classList.contains('sh-high')) {
-      title.textContent = t.suspectIPsTitle;
-      if (sub) sub.textContent = t.suspectIPsSub;
-    } else if (sh.classList.contains('sh-medium')) {
-      title.textContent = t.possibleIPsTitle;
-      if (sub) sub.textContent = t.possibleIPsSub;
-    }
-  });
-
-  q('.stale-label').forEach(function(el){ el.textContent = t.staleLabel; });
-  q('.stale-hint').forEach(function(el){ el.textContent = t.staleHint; });
-  q('.stale-time').forEach(function(el){
-    var strong = el.querySelector('strong');
-    if (strong) {
-      var tv = strong.textContent;
-      while (el.firstChild) el.removeChild(el.firstChild);
-      el.appendChild(document.createTextNode(t.lastRecord2 + ' '));
-      var ns2 = document.createElement('strong');
-      ns2.textContent = tv;
-      el.appendChild(ns2);
-    }
-  });
-
-  q('.ff-label').forEach(function(el){
-    var version = el.textContent.indexOf('MAX') !== -1 ? 'Free Fire MAX' : 'Free Fire';
-    el.textContent = version + ' — ' + t.ffLabel;
-  });
-  var ffTags = q('.ff-tag');
-  [t.ffLastOpen, t.ffFirstOpen].forEach(function(v,i){
-    if (ffTags[i]) ffTags[i].textContent = v;
-  });
-  q('.ff-sessions').forEach(function(el){
-    var num = el.textContent.match(/\d+/);
-    if (num) el.textContent = num[0] + ' ' + t.ffSessions;
-  });
-  q('.ff-hint').forEach(function(el){ el.textContent = t.ffHint; });
-
-  q('.appstore-label').forEach(function(el){ el.textContent = t.appStoreLabel; });
-  q('.appstore-hint').forEach(function(el){ el.textContent = t.appStoreHint; });
-
-  q('.ok').forEach(function(el){ el.textContent = t.noVPS; });
-
-  var labelMap = {
-    'IP': 'labelIP',
-    'País': 'labelCountry', 'Country': 'labelCountry', 'País': 'labelCountry',
-    'Provedor': 'labelProvider', 'Provider': 'labelProvider', 'Proveedor': 'labelProvider',
-    'Org': 'labelOrg',
-    'rDNS': 'labelRDNS',
-    'HTTP': 'labelHTTP',
-    'Motivo': 'labelReason', 'Reason': 'labelReason', 'Motivo': 'labelReason',
-    'Usado por': 'labelUsedBy', 'Used by': 'labelUsedBy', 'Usado por': 'labelUsedBy',
-    'App': 'labelApp',
-    'Cheat': 'labelCheat',
-    'Indicador': 'labelIndicator', 'Indicator': 'labelIndicator',
-  };
-
-  q('.card').forEach(function(card){
-    var badge = card.querySelector('.badge');
-    var connsEl = card.querySelector('.conns');
-    if (connsEl) {
-      var num = connsEl.textContent.match(/\d+/);
-      if (num) connsEl.textContent = num[0] + ' ' + t.conns;
-    }
-    if (badge) {
-      if (badge.classList.contains('critical')) {
-        badge.innerHTML = badge.getAttribute('data-badge-type') === 'known-cheat' ? t.badgeKnownCheat : t.badgeCritical;
-      }
-      else if (badge.classList.contains('tld-flag')) badge.innerHTML = t.badgeDomainSuspect;
-      else if (badge.classList.contains('high')) badge.textContent = t.badgeSuspect;
-      else if (badge.classList.contains('medium')) badge.textContent = t.badgePossible;
-    }
-    card.querySelectorAll('.label').forEach(function(lbl){
-      var sub = lbl.querySelector('.sub');
-      if (sub) {
-        var fn = lbl.childNodes[0];
-        if (fn && fn.nodeType === 3) fn.textContent = t.labelSuspectIPs + ' ';
-        var nums = sub.textContent.match(/\d+/g);
-        if (nums && nums.length >= 2) sub.textContent = nums[0] + ' ' + t.of + ' ' + nums[1] + ' ' + t.domains;
-        return;
-      }
-      var txt = lbl.textContent.trim();
-      var key = labelMap[txt];
-      if (key && t[key]) lbl.textContent = t[key];
-    });
-    card.querySelectorAll('.none').forEach(function(el){ el.textContent = t.noneDetected; });
-    card.querySelectorAll('.val').forEach(function(el){
-      if (el.textContent.indexOf('Online') !== -1 || el.textContent.indexOf('Offline') !== -1 || el.textContent.indexOf('línea') !== -1 || el.textContent.indexOf('conexión') !== -1) {
-        el.innerHTML = el.innerHTML
-          .replace(/●\s*(En línea|Online)/g, t.online)
-          .replace(/●\s*(Sin conexión[^<]*|Offline[^<]*)/g, t.offline);
-      }
-    });
-  });
-}
-window.setLang = setLang;
-
-(function() {
-  function bindLangButtons() {
-    var langs = ['pt', 'en', 'es'];
-    langs.forEach(function(l) {
-      var btn = document.getElementById('btn-' + l);
-      if (btn) {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          setLang(l);
-        });
-      }
-    });
-  }
-
-  function tryBind(attempts) {
-    var btn = document.getElementById('btn-pt');
-    if (btn) {
-      bindLangButtons();
-    } else if (attempts > 0) {
-      setTimeout(function() { tryBind(attempts - 1); }, 100);
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { tryBind(10); });
-  } else {
-    tryBind(10);
-  }
-})();
-<\/script>`;
-}
-
-async function showResult(html) {
-  let wv = new WebView()
-  await wv.loadHTML(html, "http://localhost")
-  let langScript = `var TRANSLATIONS = {
-  pt: {
-    eyebrow: "Scanner iOS",
-    credits: "por Fantasma · Juniormodz · Teca",
+    credits: "por Fantasmin · Samir · Katiau",
     fileLabel: "Arquivo:",
     start: "Início",
     lastRecord: "Último registro",
@@ -2278,7 +1757,7 @@ async function showResult(html) {
   },
   en: {
     eyebrow: "iOS Scanner",
-    credits: "by Fantasma · Juniormodz · Teca",
+    credits: "by Fantasmin · Samir · Katiau",
     fileLabel: "File:",
     start: "Start",
     lastRecord: "Last record",
@@ -2355,7 +1834,7 @@ async function showResult(html) {
   },
   es: {
     eyebrow: "Scanner iOS",
-    credits: "por Fantasma · Juniormodz · Teca",
+    credits: "por Fantasmin · Samir · Katiau",
     fileLabel: "Archivo:",
     start: "Inicio",
     lastRecord: "Último registro",
@@ -2617,8 +2096,8 @@ function setLang(lang) {
     card.querySelectorAll('.val').forEach(function(el){
       if (el.textContent.indexOf('Online') !== -1 || el.textContent.indexOf('Offline') !== -1 || el.textContent.indexOf('línea') !== -1 || el.textContent.indexOf('conexión') !== -1) {
         el.innerHTML = el.innerHTML
-          .replace(/●\\s*(En línea|Online)/g, t.online)
-          .replace(/●\\s*(Sin conexión[^<]*|Offline[^<]*)/g, t.offline);
+          .replace(/●\s*(En línea|Online)/g, t.online)
+          .replace(/●\s*(Sin conexão[^<]*|Offline[^<]*)/g, t.offline);
       }
     });
   });
@@ -2653,8 +2132,15 @@ window.setLang = setLang;
   } else {
     tryBind(10);
   }
-})();`
-  await wv.evaluateJavaScript(langScript)
+})();
+<\/script>`;
+}
+
+async function showResult(html) {
+  let wv = new WebView()
+  await wv.loadHTML(html, "http://localhost")
+  let langScriptText = getLangScriptText()
+  await wv.evaluateJavaScript(langScriptText)
   Speech.speak(S.done)
   await wait(1200)
   await wv.present(false)
